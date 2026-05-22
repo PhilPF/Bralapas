@@ -11,44 +11,49 @@
     body{font-family:'Outfit',sans-serif;background:#08080d;color:white;min-height:100vh}
     #app{min-height:100vh}
 
-    .page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;gap:32px}
-    .topbar{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.07)}
-    .pbar{height:3px;background:rgba(255,255,255,.06)}
-    .pfill{height:100%;transition:width .4s ease}
+    .page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;gap:28px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0}
+    .pbar{height:3px;background:rgba(255,255,255,.06);flex-shrink:0}
+    .pfill{height:100%;transition:width .5s ease}
 
-    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:14px 28px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:transform .15s,filter .15s,opacity .15s;border:none;text-align:center}
-    .btn:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.08)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:12px;padding:13px 26px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:transform .15s,filter .15s,opacity .15s;border:none}
+    .btn:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.1)}
     .btn:active:not(:disabled){transform:translateY(0)}
     .btn:disabled{opacity:.35;cursor:not-allowed}
     .bw{background:white;color:#000}
-    .bg{background:transparent;color:white;border:2px solid rgba(255,255,255,.25)}
-    .bg:hover:not(:disabled){border-color:rgba(255,255,255,.6)}
+    .bg{background:rgba(255,255,255,.08);color:white;border:1.5px solid rgba(255,255,255,.2)}
+    .bg:hover:not(:disabled){border-color:rgba(255,255,255,.5)}
 
-    .inp{width:100%;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:12px;padding:14px 18px;color:white;font-family:'Outfit',sans-serif;font-size:16px;outline:none;transition:border-color .2s}
+    .inp{width:100%;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:12px;padding:13px 18px;color:white;font-family:'Outfit',sans-serif;font-size:16px;outline:none;transition:border-color .2s}
     .inp:focus{border-color:rgba(255,255,255,.4)}
     .inp::placeholder{color:rgba(255,255,255,.25)}
 
-    .scard{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.09);border-radius:16px;padding:22px 24px;cursor:pointer;text-align:left;color:white;display:flex;align-items:center;gap:16px;transition:border-color .2s,background .2s;width:100%}
+    .scard{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.09);border-radius:16px;padding:20px 22px;cursor:pointer;text-align:left;color:white;display:flex;align-items:center;gap:16px;transition:border-color .2s,background .2s;width:100%}
     .scard:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08)}
 
-    .obtn{width:100%;border:none;border-radius:16px;padding:20px 16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px;font-family:'Outfit',sans-serif;font-size:clamp(14px,3.5vw,18px);font-weight:600;color:white;min-height:90px;transition:transform .15s,filter .15s}
+    .obtn{width:100%;border:none;border-radius:16px;padding:18px 14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Outfit',sans-serif;font-size:clamp(13px,3.2vw,17px);font-weight:600;color:white;min-height:84px;transition:transform .15s,filter .15s}
     .obtn:hover:not(:disabled){transform:scale(1.03);filter:brightness(1.1)}
     .obtn:active:not(:disabled){transform:scale(.97)}
     .obtn:disabled{cursor:default}
 
-    .chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:5px 14px;font-size:14px}
+    .chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:5px 12px;font-size:13px;display:inline-flex;align-items:center;gap:5px}
+
+    .rank-row{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px}
+
     .code{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,14vw,80px);font-weight:700;letter-spacing:10px;text-align:center}
-    .linkbox{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 16px;font-size:12px;color:#888;word-break:break-all;max-width:440px;text-align:center}
+    .linkbox{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 16px;font-size:12px;color:#888;word-break:break-all;text-align:center;max-width:440px}
 
     @keyframes fi{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
     .fi{animation:fi .35s ease forwards}
+    @keyframes pop{0%{transform:scale(.8);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+    .pop{animation:pop .4s ease forwards}
   </style>
 </head>
 <body>
 <div id="app"><div style="height:100vh;display:flex;align-items:center;justify-content:center;color:#444;font-family:'Outfit',sans-serif">Cargando…</div></div>
 
 <script type="module">
-import { initializeApp }                             from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { initializeApp }                               from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 import { getDatabase, ref, set, get, onValue, update } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
 
 // ─── Firebase ────────────────────────────────────────────────────────────────
@@ -64,20 +69,19 @@ const db = getDatabase(initializeApp({
 
 // ─── Datos ───────────────────────────────────────────────────────────────────
 const SECS = [
-  { id:"plantas", emoji:"🌿", title:"Plantas", tipo:"definition", accent:"#52b788",
+  { id:"plantas", emoji:"🌿", title:"Plantas", subtitle:"¿Cuál es la palabra real?", tipo:"definition", accent:"#52b788",
     questions:[
       {prompt:"Masa de pelos blanquecinos y densos que recubren tallos y hojas, dándoles aspecto lanoso.",correct:"Tomento",options:["Tomento","Velema","Flocelo","Lanosema"]},
       {prompt:"Pequeño apéndice foliáceo que aparece en pares en la base del pecíolo de una hoja.",correct:"Estípula",options:["Estípula","Foliela","Axilema","Bracteína"]},
       {prompt:"Pecíolo aplanado y ensanchado que sustituye funcionalmente a la lámina foliar.",correct:"Filodio",options:["Filodio","Laminodio","Peciolema","Cladema"]},
-      {prompt:"Estructura en forma de capuchón que protege el meristemo apical de la raíz durante su crecimiento.",correct:"Caliptra",options:["Caliptra","Rizópilo","Radicúpula","Meristocapa"]},
+      {prompt:"Estructura en forma de capuchón que protege el meristemo apical de la raíz.",correct:"Caliptra",options:["Caliptra","Rizópilo","Radicúpula","Meristocapa"]},
       {prompt:"Momento en que una flor alcanza su plena apertura y está en condiciones de reproducción.",correct:"Antesis",options:["Antesis","Floresis","Antofisis","Efloresis"]},
       {prompt:"Capa externa y resistente de la pared del grano de polen; persiste en el registro fósil.",correct:"Exina",options:["Exina","Polinina","Extícula","Esporema"]},
-      {prompt:"Cualquier estructura —semilla, espora, fragmento— capaz de dispersarse y originar un nuevo individuo.",correct:"Propágulo",options:["Propágulo","Germinema","Dispersema","Propicula"]},
-      {prompt:"Tejido vegetal de sostén con células de paredes gruesas y lignificadas, generalmente muertas en la madurez.",correct:"Esclerénquima",options:["Esclerénquima","Lignénquima","Fibrenquima","Durenquima"]},
+      {prompt:"Cualquier estructura —semilla, espora, fragmento— capaz de originar un nuevo individuo.",correct:"Propágulo",options:["Propágulo","Germinema","Dispersema","Propicula"]},
+      {prompt:"Tejido vegetal de sostén con células de paredes gruesas y lignificadas, muertas en la madurez.",correct:"Esclerénquima",options:["Esclerénquima","Lignénquima","Fibrenquima","Durenquima"]},
       {prompt:"Apéndice articulado con función sensorial en la zona bucal de insectos y arácnidos.",correct:"Palpo",options:["Palpo","Sensorino","Tactema","Palema"]},
-    ]
-  },
-  { id:"croata", emoji:"🇭🇷", title:"Croata", tipo:"word", accent:"#48cae4",
+    ]},
+  { id:"croata", emoji:"🇭🇷", title:"Croata", subtitle:"¿Qué significa esta palabra en croata?", tipo:"word", accent:"#48cae4",
     questions:[
       {prompt:"pero", correct:"pluma",   options:["barco","clavo","nube","pluma"]},
       {prompt:"dar",  correct:"regalo",  options:["dar","lluvia","regalo","montaña"]},
@@ -89,9 +93,8 @@ const SECS = [
       {prompt:"luk",  correct:"cebolla", options:["mirada","puente","cebolla","viento"]},
       {prompt:"ton",  correct:"atún",    options:["tono","barco","atún","tierra"]},
       {prompt:"mast", correct:"grasa",   options:["mástil","luna","río","grasa"]},
-    ]
-  },
-  { id:"catala", emoji:"🔴", title:"Català", tipo:"word", accent:"#f4a261",
+    ]},
+  { id:"catala", emoji:"🔴", title:"Català", subtitle:"¿Qué significa esta palabra en catalán?", tipo:"word", accent:"#f4a261",
     questions:[
       {prompt:"pregadéu", correct:"mantis religiosa",options:["libélula","escarabajo","ciempiés","mantis religiosa"]},
       {prompt:"arna",     correct:"polilla",          options:["tábano","grillo","chinche","polilla"]},
@@ -103,270 +106,312 @@ const SECS = [
       {prompt:"garbuix",  correct:"revoltijo",        options:["bullicio","rencor","descuido","revoltijo"]},
       {prompt:"gatzara",  correct:"jolgorio",         options:["disputa","madrugada","resaca","jolgorio"]},
       {prompt:"fotimer",  correct:"cantidad enorme",  options:["exageración","desastre","mentira","cantidad enorme"]},
-    ]
-  },
+    ]},
 ];
 
-const OPTS = [
-  {bg:"#e63946",sh:"▲"},{bg:"#4361ee",sh:"◆"},
-  {bg:"#f4a261",sh:"●"},{bg:"#52b788",sh:"■"},
-];
+const OPTS=[{bg:"#e63946",sh:"▲"},{bg:"#4361ee",sh:"◆"},{bg:"#f4a261",sh:"●"},{bg:"#52b788",sh:"■"}];
+const MEDALS=['🥇','🥈','🥉'];
 
 // ─── Utils ───────────────────────────────────────────────────────────────────
-const shuffle = a => { const b=[...a]; for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];} return b; };
-const code4   = () => Array.from({length:4},()=>'BCDFGHJKLMNPQRSTVWXYZ'[0|Math.random()*21]).join('');
-const $       = id => document.getElementById(id);
+const shuffle = a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;};
+const code4   = ()=>Array.from({length:4},()=>'BCDFGHJKLMNPQRSTVWXYZ'[0|Math.random()*21]).join('');
+const $       = id=>document.getElementById(id);
 const jstr    = JSON.stringify;
-const jpar    = v => { try{return JSON.parse(v);}catch{return null;} };
+const jpar    = v=>{try{return JSON.parse(v);}catch{return null;}};
+const calcPts = (elapsed)=>Math.max(50, 100 - Math.floor(Math.max(0, elapsed-3))*3);
 
-// ─── Estado global ────────────────────────────────────────────────────────────
-const S = {
-  mode: 'home',   // home | hsel | hgame | pjoin | pgame
-  code: null,
-  name: null,
-  isHost: false,
-  sala: null,
-  sec: null,      // section object (host)
-  orden: null,    // shuffled indices (host)
-  _ans: null,     // correct answer for current q (host)
-  unsub: null,
+// ─── Estado ──────────────────────────────────────────────────────────────────
+const S={
+  mode:'home',  // home | hgame | pjoin | pgame
+  code:null, name:null, isHost:false,
+  sala:null,
+  allOrden:null,  // [{secId,qIdx},...] full game order (host only)
+  _ans:null,      // correct answer for current q (host only)
+  unsub:null,
+  _timerInt:null, // interval for pts countdown (player only)
+  _lastQIdx:-1,   // last rendered preguntaIdx (for timer)
 };
 
 // ─── Firebase ops ─────────────────────────────────────────────────────────────
-async function createRoom(secId) {
-  const sec    = SECS.find(s=>s.id===secId);
-  const orden  = shuffle(sec.questions.map((_,i)=>i));
-  const code   = code4();
-  const q0     = sec.questions[orden[0]];
-  const opts0  = shuffle(q0.options);
-
-  await set(ref(db,`salas/${code}`), {
-    seccionId: secId, tipo: sec.tipo,
-    orden: jstr(orden), total: sec.questions.length,
-    estado: 'lobby', preguntaIdx: 0,
-    prompt: q0.prompt, opciones: jstr(opts0),
-    correcto:null, respuestas:null, puntuaciones:null, jugadores:null,
+async function createRoom(){
+  const code=code4();
+  const allOrden=[
+    ...shuffle(SECS[0].questions.map((_,i)=>({secId:'plantas',qIdx:i}))),
+    ...shuffle(SECS[1].questions.map((_,i)=>({secId:'croata', qIdx:i}))),
+    ...shuffle(SECS[2].questions.map((_,i)=>({secId:'catala', qIdx:i}))),
+  ];
+  await set(ref(db,`salas/${code}`),{
+    orden:jstr(allOrden), total:allOrden.length,
+    estado:'lobby', seccionId:'plantas', preguntaIdx:0,
+    prompt:null, opciones:null, tipo:null,
+    correcto:null, questionStartTime:null,
+    respuestas:null, tiempos:null,
+    puntuaciones:null, jugadores:null, marcador:false,
   });
-
-  S.sec   = sec;
-  S.orden = orden;
-  S._ans  = q0.correct;
-  sessionStorage.setItem('brh', jstr({code, secId, orden}));
+  S.allOrden=allOrden;
+  sessionStorage.setItem('brh',jstr({code,allOrden}));
   return code;
 }
 
-async function joinRoom(code, name) {
-  const snap = await get(ref(db,`salas/${code}`));
-  if (!snap.exists()) throw new Error('Sala no encontrada');
-  const sala = snap.val();
-  if (sala.estado==='fin')        throw new Error('La partida ya ha terminado');
-  if (sala.jugadores?.[name])     throw new Error('Ese nombre ya está en uso');
-  await update(ref(db,`salas/${code}`), {
-    [`jugadores/${name}`]: true,
-    [`puntuaciones/${name}`]: 0,
-  });
+async function joinRoom(code,name){
+  const snap=await get(ref(db,`salas/${code}`));
+  if(!snap.exists()) throw new Error('Sala no encontrada');
+  const sala=snap.val();
+  if(sala.estado==='fin') throw new Error('La partida ya ha terminado');
+  if(sala.jugadores?.[name]) throw new Error('Ese nombre ya está en uso');
+  await update(ref(db,`salas/${code}`),{[`jugadores/${name}`]:true,[`puntuaciones/${name}`]:0});
 }
 
-function listenRoom(code) {
-  if (S.unsub) S.unsub();
-  S.unsub = onValue(ref(db,`salas/${code}`), snap => {
-    S.sala = snap.exists() ? snap.val() : null;
-    if (S.sala && S.isHost && S.sec && S.orden) {
-      S._ans = S.sec.questions[S.orden[S.sala.preguntaIdx]]?.correct || null;
+function listenRoom(code){
+  if(S.unsub) S.unsub();
+  S.unsub=onValue(ref(db,`salas/${code}`),snap=>{
+    S.sala=snap.exists()?snap.val():null;
+    if(S.sala&&S.isHost&&S.allOrden){
+      const {secId,qIdx}=S.allOrden[S.sala.preguntaIdx];
+      S._ans=SECS.find(s=>s.id===secId)?.questions[qIdx]?.correct||null;
     }
     render();
   });
 }
 
-async function startGame() {
-  await update(ref(db,`salas/${S.code}`), {estado:'pregunta'});
+async function startLobby(){
+  // Go to first section intro
+  await update(ref(db,`salas/${S.code}`),{estado:'seccion-intro',seccionId:'plantas',preguntaIdx:0});
 }
 
-async function revealAnswers() {
-  const {sala, code, _ans} = S;
-  const resps = sala.respuestas || {};
-  const pts   = sala.puntuaciones || {};
-  const upd   = {estado:'revelando', correcto:_ans};
-  Object.entries(resps).forEach(([n,r]) => {
-    if (r===_ans) upd[`puntuaciones/${n}`] = (pts[n]||0)+1;
+async function startSection(){
+  const {secId,qIdx}=S.allOrden[S.sala.preguntaIdx];
+  const sec=SECS.find(s=>s.id===secId);
+  const q=sec.questions[qIdx];
+  const opts=shuffle(q.options);
+  S._ans=q.correct;
+  await update(ref(db,`salas/${S.code}`),{
+    estado:'pregunta', seccionId:secId, tipo:sec.tipo,
+    prompt:q.prompt, opciones:jstr(opts),
+    correcto:null, respuestas:null, tiempos:null,
+    questionStartTime:Date.now(), marcador:false,
   });
-  await update(ref(db,`salas/${code}`), upd);
 }
 
-async function nextQuestion() {
-  const {sala, sec, code} = S;
-  const orden = jpar(sala.orden);
-  const idx   = sala.preguntaIdx + 1;
-  if (idx >= orden.length) {
-    await update(ref(db,`salas/${code}`), {estado:'fin'});
+async function revealAnswers(){
+  const {sala,_ans,code}=S;
+  const resps =sala.respuestas||{};
+  const tiempos=sala.tiempos||{};
+  const pts   =sala.puntuaciones||{};
+  const qst   =sala.questionStartTime||Date.now();
+  const upd   ={estado:'revelando',correcto:_ans};
+  Object.entries(resps).forEach(([name,opt])=>{
+    if(opt===_ans){
+      const elapsed=Math.max(0,(tiempos[name]-qst)/1000);
+      upd[`puntuaciones/${name}`]=(pts[name]||0)+calcPts(elapsed);
+    }
+  });
+  await update(ref(db,`salas/${code}`),upd);
+}
+
+async function nextQuestion(){
+  const {sala,allOrden,code}=S;
+  const nextIdx=sala.preguntaIdx+1;
+  if(nextIdx>=sala.total){
+    await update(ref(db,`salas/${code}`),{estado:'fin',marcador:false});
     return;
   }
-  const q = sec.questions[orden[idx]];
-  S._ans = q.correct;
-  await update(ref(db,`salas/${code}`), {
-    estado:'pregunta', preguntaIdx:idx,
-    prompt:q.prompt, opciones:jstr(shuffle(q.options)),
-    correcto:null, respuestas:null,
-  });
+  const curSecId=allOrden[sala.preguntaIdx].secId;
+  const nxtSecId=allOrden[nextIdx].secId;
+  if(nxtSecId!==curSecId){
+    await update(ref(db,`salas/${code}`),{
+      estado:'seccion-intro',seccionId:nxtSecId,preguntaIdx:nextIdx,
+      correcto:null,respuestas:null,tiempos:null,marcador:false,
+    });
+  } else {
+    const {secId,qIdx}=allOrden[nextIdx];
+    const sec=SECS.find(s=>s.id===secId);
+    const q=sec.questions[qIdx];
+    const opts=shuffle(q.options);
+    S._ans=q.correct;
+    await update(ref(db,`salas/${code}`),{
+      estado:'pregunta',preguntaIdx:nextIdx,
+      prompt:q.prompt,opciones:jstr(opts),
+      correcto:null,respuestas:null,tiempos:null,
+      questionStartTime:Date.now(),marcador:false,
+    });
+  }
 }
 
-async function sendAnswer(opt) {
-  await update(ref(db,`salas/${S.code}/respuestas`), {[S.name]: opt});
+async function toggleMarcador(){
+  await update(ref(db,`salas/${S.code}`),{marcador:!S.sala.marcador});
+}
+
+async function sendAnswer(opt){
+  await update(ref(db,`salas/${S.code}`),{
+    [`respuestas/${S.name}`]:opt,
+    [`tiempos/${S.name}`]:Date.now(),
+  });
 }
 
 // ─── Render ───────────────────────────────────────────────────────────────────
-function render() {
-  const app = document.getElementById('app');
-
-  // Sala borrada mientras jugamos
-  if (!S.sala && (S.mode==='hgame'||S.mode==='pgame')) {
-    app.innerHTML = `
-      <div class="page fi" style="text-align:center;gap:20px;">
-        <div style="font-size:48px;">🔌</div>
-        <h2 style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;">Sala no encontrada</h2>
-        <button class="btn bw" id="bh">Volver al inicio</button>
-      </div>`;
-    $('bh')?.addEventListener('click', () => { S.mode='home'; S.sala=null; render(); });
+function render(){
+  const app=document.getElementById('app');
+  if(!S.sala&&(S.mode==='hgame'||S.mode==='pgame')){
+    app.innerHTML=`<div class="page fi" style="text-align:center;gap:20px;">
+      <div style="font-size:48px;">🔌</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;">Sala no encontrada</h2>
+      <button class="btn bw" id="bh">Volver al inicio</button></div>`;
+    $('bh')?.addEventListener('click',()=>{S.mode='home';S.sala=null;render();});
     return;
   }
-
-  switch(S.mode) {
-    case 'home':  app.innerHTML = vHome();   break;
-    case 'hsel':  app.innerHTML = vHSel();   break;
-    case 'hgame': app.innerHTML = vHGame();  break;
-    case 'pjoin': app.innerHTML = vPJoin();  break;
-    case 'pgame': app.innerHTML = vPGame();  break;
+  switch(S.mode){
+    case 'home':  app.innerHTML=vHome();   break;
+    case 'hgame': app.innerHTML=vHGame();  break;
+    case 'pjoin': app.innerHTML=vPJoin();  break;
+    case 'pgame': app.innerHTML=vPGame();  break;
   }
   bind();
+  afterRender();
 }
 
 // ─── Vistas ───────────────────────────────────────────────────────────────────
 
-function vHome() {
-  return `
-  <div class="page fi" style="text-align:center;">
+function vHome(){
+  return`<div class="page fi" style="text-align:center;">
     <div>
       <p style="font-size:11px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:16px;">Juego de palabras</p>
       <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(60px,14vw,100px);font-weight:700;line-height:1;margin-bottom:16px;">Bralapas</h1>
-      <p style="color:#555;font-size:16px;">¿Lo sabes o lo inventas?</p>
+      <p style="color:#555;font-size:15px;">Plantas · Croata · Català</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:300px;">
-      <button class="btn bw" id="bhost">Crear sala</button>
-      <button class="btn bg" id="bjoin">Unirme a una sala</button>
+      <button class="btn bw" id="bhost">Crear partida</button>
+      <button class="btn bg" id="bjoin">Unirme a una partida</button>
     </div>
   </div>`;
 }
 
-function vHSel() {
-  return `
-  <div class="page fi">
-    <div style="text-align:center;">
-      <p style="font-size:11px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:12px;">Nueva sala</p>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:700;">Elige una sección</h2>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:440px;">
-      ${SECS.map(s=>`
-        <button class="scard" data-sid="${s.id}">
-          <span style="font-size:34px;">${s.emoji}</span>
-          <div>
-            <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;">${s.title}</div>
-            <div style="font-size:13px;color:${s.accent};margin-top:2px;">${s.questions.length} preguntas</div>
-          </div>
-        </button>`).join('')}
-    </div>
-    <button class="btn bg" id="bback">← Volver</button>
-  </div>`;
-}
+// ── Host game (handles all host states) ────────────────────────────────────────
+function vHGame(){
+  const sala=S.sala;
+  if(!sala) return`<div class="page"><p style="color:#555">Cargando…</p></div>`;
+  const {estado,preguntaIdx,prompt,correcto,tipo,total,marcador}=sala;
+  const opciones=jpar(sala.opciones)||[];
+  const respuestas=sala.respuestas||{};
+  const tiempos=sala.tiempos||{};
+  const puntuaciones=sala.puntuaciones||{};
+  const jugadores=Object.keys(sala.jugadores||{});
+  const respondidos=Object.keys(respuestas).length;
+  const sec=SECS.find(s=>s.id===sala.seccionId);
+  const secIdx=SECS.findIndex(s=>s.id===sala.seccionId);
+  const isRev=estado==='revelando';
+  const qst=sala.questionStartTime||0;
 
-function vHGame() {
-  const sala = S.sala;
-  if (!sala) return `<div class="page"><p style="color:#555">Cargando…</p></div>`;
+  // Marcador overlay
+  if(marcador) return vMarcador(puntuaciones,jugadores,sala,true);
 
-  const {estado, preguntaIdx, prompt, correcto, tipo, total} = sala;
-  const opciones  = jpar(sala.opciones) || [];
-  const respuestas = sala.respuestas || {};
-  const puntuaciones = sala.puntuaciones || {};
-  const jugadores  = Object.keys(sala.jugadores || {});
-  const respondidos = Object.keys(respuestas).length;
-  const sec = SECS.find(s=>s.id===sala.seccionId);
-  const isRev = estado === 'revelando';
-
-  // ── Lobby ──
-  if (estado === 'lobby') {
-    const link = `${location.origin}${location.pathname}?sala=${S.code}`;
-    return `
-    <div class="page fi" style="text-align:center;">
+  // Lobby
+  if(estado==='lobby'){
+    const link=`${location.origin}${location.pathname}?sala=${S.code}`;
+    return`<div class="page fi" style="text-align:center;">
       <div>
         <p style="font-size:11px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:14px;">Código de sala</p>
         <div class="code">${S.code}</div>
-        <p style="color:#555;font-size:13px;margin-top:12px;">Comparte este enlace con los jugadores:</p>
+        <p style="color:#555;font-size:13px;margin-top:12px;">Enlace para los jugadores:</p>
         <div class="linkbox" style="margin-top:8px;">${link}</div>
       </div>
       <div style="width:100%;max-width:440px;">
         <p style="font-size:11px;letter-spacing:3px;color:#555;text-transform:uppercase;margin-bottom:12px;">Jugadores (${jugadores.length})</p>
         <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:36px;">
-          ${jugadores.length
-            ? jugadores.map(p=>`<span class="chip">${p}</span>`).join('')
-            : `<p style="color:#444;font-style:italic;font-size:14px;">Esperando jugadores…</p>`}
+          ${jugadores.length?jugadores.map(p=>`<span class="chip">${p}</span>`).join('')
+            :`<p style="color:#444;font-style:italic;font-size:14px;">Esperando jugadores…</p>`}
         </div>
       </div>
-      <button class="btn bw" id="bstart" ${jugadores.length===0?'disabled':''}>Empezar →</button>
+      <p style="font-size:13px;color:#555;max-width:380px;text-align:center;">La partida incluye las 3 secciones: 🌿 Plantas · 🇭🇷 Croata · 🔴 Català</p>
+      <button class="btn bw" id="bstartlobby" ${jugadores.length===0?'disabled':''}>Empezar →</button>
     </div>`;
   }
 
-  // ── Fin ──
-  if (estado === 'fin') return vFin(puntuaciones, true);
+  // Section intro
+  if(estado==='seccion-intro'){
+    const ranking=Object.entries(puntuaciones).sort(([,a],[,b])=>b-a);
+    const isFirst=secIdx===0&&Object.values(puntuaciones).every(v=>v===0);
+    return`<div class="page fi" style="text-align:center;gap:24px;">
+      <div>
+        <p style="font-size:11px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:10px;">Sección ${secIdx+1} de ${SECS.length}</p>
+        <div style="font-size:52px;margin-bottom:10px;">${sec.emoji}</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,10vw,60px);font-weight:700;">${sec.title}</h2>
+        <p style="color:#666;font-size:14px;margin-top:6px;">${sec.subtitle}</p>
+      </div>
+      ${!isFirst&&ranking.length?`
+      <div style="width:100%;max-width:400px;">
+        <p style="font-size:11px;letter-spacing:3px;color:#555;text-transform:uppercase;margin-bottom:12px;">Clasificación actual</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${ranking.map(([n,p],i)=>`
+            <div class="rank-row" style="${i===0?'border-color:rgba(255,215,0,.25);background:rgba(255,215,0,.06);':''}">
+              <span style="width:28px;font-size:16px;">${MEDALS[i]||`${i+1}.`}</span>
+              <span style="flex:1;font-size:15px;font-weight:500;">${n}</span>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:${sec.accent};">${p}</span>
+            </div>`).join('')}
+        </div>
+      </div>`:``}
+      <button class="btn bw" id="bstartsec">
+        ${isFirst?'¡Empezar partida! →':'Empezar sección →'}
+      </button>
+    </div>`;
+  }
 
-  // ── Pregunta / Revelando ──
-  return `
-  <div style="min-height:100vh;display:flex;flex-direction:column;background:#08080d;">
+  // Fin
+  if(estado==='fin') return vFin(puntuaciones,true);
+
+  // Pregunta / Revelando
+  return`<div style="min-height:100vh;display:flex;flex-direction:column;background:#08080d;">
     <div class="topbar">
-      <span style="font-size:13px;color:#555;">${sec?.emoji} ${sec?.title}</span>
-      <span style="font-size:13px;color:#555;">${preguntaIdx+1} / ${total}</span>
+      <span style="font-size:13px;color:#666;">${sec?.emoji} ${sec?.title} · ${preguntaIdx+1}/${total}</span>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <button class="btn bg" id="btogm" style="padding:8px 14px;font-size:12px;">📊 Marcador</button>
+        ${isRev?`<button class="btn bw" id="bnext" style="padding:9px 18px;font-size:13px;">
+          ${preguntaIdx+1<total?'Siguiente →':'Ver resultados →'}</button>`
+          :`<button class="btn bw" id="breveal" style="padding:9px 18px;font-size:13px;">Revelar (${respondidos}/${jugadores.length})</button>`}
+      </div>
     </div>
     <div class="pbar"><div class="pfill" style="width:${(preguntaIdx/total)*100}%;background:${sec?.accent};"></div></div>
 
-    <div class="fi" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 28px;max-width:740px;margin:0 auto;width:100%;gap:28px;">
+    <div class="fi" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 24px;max-width:760px;margin:0 auto;width:100%;gap:24px;">
 
       ${tipo==='word'
-        ? `<div style="font-family:'Cormorant Garamond',serif;font-size:clamp(60px,13vw,100px);font-weight:700;text-align:center;">${prompt}</div>`
-        : `<div style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.5vw,23px);font-style:italic;line-height:1.65;border-left:3px solid ${sec?.accent};padding-left:20px;">${prompt}</div>`
+        ?`<div style="font-family:'Cormorant Garamond',serif;font-size:clamp(58px,13vw,96px);font-weight:700;text-align:center;">${prompt}</div>`
+        :`<div style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.5vw,23px);font-style:italic;line-height:1.65;border-left:3px solid ${sec?.accent};padding-left:20px;">${prompt}</div>`
       }
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;">
-        ${opciones.map((opt,i) => {
-          const c = OPTS[i];
-          const voters    = isRev ? Object.entries(respuestas).filter(([,v])=>v===opt).map(([k])=>k) : [];
-          const isCorrect = isRev && opt===correcto;
-          const isWrong   = isRev && opt!==correcto;
-          return `
-          <div style="background:${isRev?(isCorrect?'rgba(82,183,136,.15)':'rgba(255,255,255,.04)'):c.bg+'18'};border:2px solid ${isRev?(isCorrect?'#52b788':'rgba(255,255,255,.08)'):c.bg+'88'};border-radius:12px;padding:16px;transition:all .3s;opacity:${isWrong?.5:1};">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <span style="color:${c.bg};font-size:14px;">${c.sh}</span>
-              <span style="font-weight:600;font-size:15px;flex:1;color:${isCorrect?'#b7e4c7':'white'}">${opt}</span>
-              ${isCorrect?'<span style="color:#52b788;font-size:18px;">✓</span>':''}
+        ${opciones.map((opt,i)=>{
+          const c=OPTS[i];
+          const voters=Object.entries(respuestas).filter(([,v])=>v===opt);
+          const isCorrect=isRev&&opt===correcto;
+          const isWrong=isRev&&opt!==correcto;
+          return`<div style="background:${isRev?(isCorrect?'rgba(82,183,136,.15)':'rgba(255,255,255,.04)'):c.bg+'18'};border:2px solid ${isRev?(isCorrect?'#52b788':'rgba(255,255,255,.08)'):c.bg+'88'};border-radius:12px;padding:14px 16px;transition:all .3s;opacity:${isWrong?.45:1};">
+            <div style="display:flex;align-items:center;gap:9px;">
+              <span style="color:${c.bg};font-size:13px;">${c.sh}</span>
+              <span style="font-weight:600;font-size:14px;flex:1;color:${isCorrect?'#b7e4c7':'white'}">${opt}</span>
+              ${isCorrect?'<span style="color:#52b788;font-size:16px;">✓</span>':''}
             </div>
-            ${voters.length?`<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;">${voters.map(v=>`<span class="chip" style="font-size:12px;">${v}</span>`).join('')}</div>`:''}
+            ${isRev&&voters.length?`<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;">
+              ${voters.map(([name])=>{
+                const elapsed=Math.max(0,(tiempos[name]-qst)/1000);
+                const pts=isCorrect?calcPts(elapsed):0;
+                return`<span class="chip" style="font-size:11px;color:${isCorrect?'#52b788':'#e63946'};">
+                  ${name}${isCorrect?` +${pts}`:' ✗'}</span>`;
+              }).join('')}
+            </div>`:''}
           </div>`;
         }).join('')}
       </div>
 
-      <div style="display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:12px;">
-        ${!isRev
-          ? `<span style="font-size:14px;color:#555;">Respondidos: <strong style="color:white;">${respondidos}/${jugadores.length}</strong></span>
-             <button class="btn bw" id="breveal">Revelar →</button>`
-          : `<span></span>
-             <button class="btn bw" id="bnext">${preguntaIdx+1<total?'Siguiente →':'Ver resultados →'}</button>`
-        }
-      </div>
+      ${!isRev?`<p style="color:#555;font-size:13px;text-align:center;">Esperando respuestas… · Puntuación: 100pts (−3/s tras 3s, mín. 50)</p>`:''}
     </div>
   </div>`;
 }
 
-function vPJoin() {
-  const paramSala = new URLSearchParams(location.search).get('sala')||'';
-  return `
-  <div class="page fi" style="text-align:center;">
+// ── Player join ──────────────────────────────────────────────────────────────
+function vPJoin(){
+  const paramSala=new URLSearchParams(location.search).get('sala')||'';
+  return`<div class="page fi" style="text-align:center;">
     <div>
       <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(52px,12vw,80px);font-weight:700;margin-bottom:12px;">Bralapas</h1>
       <p style="color:#555;font-size:15px;">Introduce tus datos para unirte</p>
@@ -382,99 +427,159 @@ function vPJoin() {
   </div>`;
 }
 
-function vPGame() {
-  const sala = S.sala;
-  if (!sala) return `<div class="page"><p style="color:#555">Cargando…</p></div>`;
+// ── Player game (handles all player states) ───────────────────────────────────
+function vPGame(){
+  const sala=S.sala;
+  if(!sala) return`<div class="page"><p style="color:#555">Cargando…</p></div>`;
+  const {estado,preguntaIdx,prompt,correcto,tipo,total,marcador}=sala;
+  const opciones=jpar(sala.opciones)||[];
+  const respuestas=sala.respuestas||{};
+  const puntuaciones=sala.puntuaciones||{};
+  const miResp=respuestas[S.name];
+  const miPts=puntuaciones[S.name]||0;
+  const sec=SECS.find(s=>s.id===sala.seccionId);
+  const secIdx=SECS.findIndex(s=>s.id===sala.seccionId);
 
-  const {estado, preguntaIdx, prompt, correcto, tipo, total} = sala;
-  const opciones = jpar(sala.opciones) || [];
-  const respuestas = sala.respuestas || {};
-  const puntuaciones = sala.puntuaciones || {};
-  const miResp = respuestas[S.name];
-  const sec = SECS.find(s=>s.id===sala.seccionId);
+  // Marcador overlay
+  if(marcador) return vMarcador(puntuaciones,Object.keys(sala.jugadores||{}),sala,false);
 
   // Lobby
-  if (estado==='lobby') return `
-    <div class="page fi" style="gap:24px;text-align:center;">
-      <div style="font-size:56px;">🎮</div>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;">¡Conectado!</h2>
-      <p style="color:#555;font-size:15px;">Esperando a que el host empiece…</p>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 28px;">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;letter-spacing:8px;">${S.code}</span>
-      </div>
-      <span class="chip">${S.name}</span>
-    </div>`;
+  if(estado==='lobby') return`<div class="page fi" style="gap:24px;text-align:center;">
+    <div style="font-size:52px;">🎮</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;">¡Conectado!</h2>
+    <p style="color:#555;">Esperando al host…</p>
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 28px;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;letter-spacing:8px;">${S.code}</span>
+    </div>
+    <span class="chip">${S.name}</span>
+  </div>`;
+
+  // Section intro
+  if(estado==='seccion-intro') return`<div class="page fi" style="text-align:center;gap:24px;">
+    <div>
+      <p style="font-size:11px;letter-spacing:4px;color:#555;text-transform:uppercase;margin-bottom:8px;">Sección ${secIdx+1} de ${SECS.length}</p>
+      <div style="font-size:52px;margin-bottom:10px;">${sec.emoji}</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,9vw,52px);font-weight:700;">${sec.title}</h2>
+      <p style="color:#666;font-size:14px;margin-top:6px;">${sec.subtitle}</p>
+    </div>
+    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 28px;text-align:center;">
+      <p style="font-size:12px;color:#666;margin-bottom:6px;">Tu puntuación</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700;color:${sec.accent};">${miPts}</p>
+    </div>
+    <p style="color:#555;font-size:14px;">El host empezará en breve…</p>
+  </div>`;
 
   // Fin
-  if (estado==='fin') return vFin(puntuaciones, false);
+  if(estado==='fin') return vFin(puntuaciones,false);
+
+  // Topbar común durante el juego
+  const topbar=`<div class="topbar">
+    <span style="font-size:13px;color:#666;">${S.name}</span>
+    <div style="display:flex;gap:16px;align-items:center;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:${sec?.accent};">${miPts} pts</span>
+      <span style="font-size:13px;color:#555;">${preguntaIdx+1}/${total}</span>
+    </div>
+  </div>
+  <div class="pbar"><div class="pfill" style="width:${(preguntaIdx/total)*100}%;background:${sec?.accent};"></div></div>`;
 
   // Revelando
-  if (estado==='revelando') {
-    const ok  = miResp && miResp===correcto;
-    const bad = miResp && miResp!==correcto;
-    return `
-    <div class="page fi" style="background:${ok?'#071a10':bad?'#190808':'#08080d'};gap:20px;text-align:center;">
-      <div style="font-size:72px;">${ok?'🎉':bad?'😬':'🤷'}</div>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,9vw,52px);font-weight:700;color:${ok?'#52b788':bad?'#e63946':'#888'};">
-        ${ok?'¡Correcto!':bad?'Incorrecto':'Sin respuesta'}
-      </h2>
-      ${!ok&&correcto?`<p style="color:#777;">Era: <strong style="color:white;">${correcto}</strong></p>`:''}
-      <p style="color:#555;font-size:14px;">Puntuación: <strong style="color:white;font-size:20px;">${puntuaciones[S.name]||0}</strong></p>
-      <p style="color:#444;font-size:13px;margin-top:4px;">Esperando al host…</p>
+  if(estado==='revelando'){
+    const ok=miResp&&miResp===correcto;
+    const bad=miResp&&miResp!==correcto;
+    const elapsed=miResp&&sala.tiempos?.[S.name]?Math.max(0,(sala.tiempos[S.name]-(sala.questionStartTime||0))/1000):0;
+    const earned=ok?calcPts(elapsed):0;
+    return`<div style="min-height:100vh;display:flex;flex-direction:column;background:${ok?'#071a10':bad?'#190808':'#08080d'};">
+      ${topbar}
+      <div class="fi" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:32px 24px;text-align:center;">
+        <div style="font-size:68px;">${ok?'🎉':bad?'😬':'🤷'}</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,9vw,52px);font-weight:700;color:${ok?'#52b788':bad?'#e63946':'#888'};">
+          ${ok?'¡Correcto!':bad?'Incorrecto':'Sin respuesta'}
+        </h2>
+        ${ok?`<div class="pop" style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:#52b788;">+${earned}</div>`:
+          (!ok&&correcto?`<p style="color:#888;">Era: <strong style="color:white;">${correcto}</strong></p>`:'')
+        }
+        <p style="color:#555;font-size:14px;margin-top:4px;">Esperando al host…</p>
+      </div>
     </div>`;
   }
 
   // Respondido, esperando revelación
-  if (miResp) return `
-    <div class="page fi" style="gap:24px;text-align:center;">
-      <div style="font-size:56px;">⏳</div>
+  if(miResp) return`<div style="min-height:100vh;display:flex;flex-direction:column;">
+    ${topbar}
+    <div class="fi" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center;padding:32px 24px;">
+      <div style="font-size:52px;">⏳</div>
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;">¡Enviado!</h2>
-      <div style="background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.15);border-radius:14px;padding:16px 28px;font-size:17px;font-weight:600;">${miResp}</div>
+      <div style="background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.15);border-radius:14px;padding:14px 28px;font-size:17px;font-weight:600;">${miResp}</div>
       <p style="color:#555;font-size:14px;">Esperando al host para revelar…</p>
-    </div>`;
+    </div>
+  </div>`;
 
   // Pregunta activa: botones grandes
-  return `
-  <div style="min-height:100vh;display:flex;flex-direction:column;background:#08080d;">
-    <div class="topbar">
-      <span style="font-size:13px;color:#555;">${S.name}</span>
-      <span style="font-size:13px;color:#555;">${preguntaIdx+1} / ${total}</span>
-    </div>
-    <div class="pbar"><div class="pfill" style="width:${(preguntaIdx/total)*100}%;background:${sec?.accent};"></div></div>
-
-    <div class="fi" style="flex:1;display:flex;flex-direction:column;padding:16px 20px;gap:14px;">
-      <div style="text-align:center;background:rgba(255,255,255,.04);border-radius:14px;padding:18px;display:flex;align-items:center;justify-content:center;min-height:80px;">
+  return`<div style="min-height:100vh;display:flex;flex-direction:column;">
+    ${topbar}
+    <div class="fi" style="flex:1;display:flex;flex-direction:column;padding:14px 16px;gap:12px;">
+      <div style="text-align:center;background:rgba(255,255,255,.04);border-radius:14px;padding:16px;display:flex;align-items:center;justify-content:center;min-height:80px;">
         ${tipo==='word'
-          ? `<div style="font-family:'Cormorant Garamond',serif;font-size:clamp(48px,12vw,80px);font-weight:700;">${prompt}</div>`
-          : `<div style="font-size:clamp(13px,2.4vw,16px);color:#ccc;font-style:italic;line-height:1.55;">${prompt}</div>`
+          ?`<div style="font-family:'Cormorant Garamond',serif;font-size:clamp(46px,11vw,76px);font-weight:700;">${prompt}</div>`
+          :`<div style="font-size:clamp(12px,2.3vw,15px);color:#ccc;font-style:italic;line-height:1.55;">${prompt}</div>`
         }
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:stretch;">
+      <div style="display:flex;justify-content:center;align-items:center;gap:8px;">
+        <span style="font-size:12px;color:#666;">Potencial:</span>
+        <span id="pts-live" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:${sec?.accent};">100</span>
+        <span style="font-size:12px;color:#666;">pts</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1;align-content:stretch;">
         ${opciones.map((opt,i)=>`
           <button class="obtn popt" data-opt="${opt}" style="background:${OPTS[i].bg};">
-            <span style="font-size:18px;">${OPTS[i].sh}</span>
-            <span>${opt}</span>
+            <span style="font-size:17px;">${OPTS[i].sh}</span><span>${opt}</span>
           </button>`).join('')}
       </div>
     </div>
   </div>`;
 }
 
-function vFin(puntuaciones, isHost) {
-  const ranking = Object.entries(puntuaciones).sort(([,a],[,b])=>b-a);
-  const M = ['🥇','🥈','🥉'];
-  return `
-  <div class="page fi" style="gap:32px;text-align:center;">
+// ── Marcador (shared) ─────────────────────────────────────────────────────────
+function vMarcador(puntuaciones,jugadores,sala,isHost){
+  const ranking=Object.entries(puntuaciones).sort(([,a],[,b])=>b-a);
+  const sec=SECS.find(s=>s.id===sala?.seccionId);
+  // Include players with 0 points not in puntuaciones
+  const todos=new Set([...Object.keys(puntuaciones),...jugadores]);
+  const full=[...todos].map(n=>[n,puntuaciones[n]||0]).sort(([,a],[,b])=>b-a);
+  return`<div style="min-height:100vh;display:flex;flex-direction:column;background:#08080d;">
+    <div class="topbar">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;">📊 Clasificación</span>
+      ${isHost?`<button class="btn bg" id="btogm" style="padding:8px 14px;font-size:12px;">Ocultar</button>`:''}
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;gap:12px;">
+      <div style="width:100%;max-width:440px;display:flex;flex-direction:column;gap:10px;">
+        ${full.map(([name,pts],i)=>`
+          <div class="rank-row fi" style="animation-delay:${i*0.06}s;${i===0?'border-color:rgba(255,215,0,.3);background:rgba(255,215,0,.07);':''}">
+            <span style="font-size:${i<3?22:16}px;width:34px;text-align:center;">${MEDALS[i]||`${i+1}.`}</span>
+            <span style="flex:1;font-size:16px;font-weight:${name===S.name?700:400};">${name}${name===S.name?' ←':''}</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:${i===0?'#ffd700':sec?.accent||'white'};">${pts}</span>
+          </div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Fin (shared) ──────────────────────────────────────────────────────────────
+function vFin(puntuaciones,isHost){
+  const jugadores=Object.keys(S.sala?.jugadores||{});
+  const todos=new Set([...Object.keys(puntuaciones),...jugadores]);
+  const full=[...todos].map(n=>[n,puntuaciones[n]||0]).sort(([,a],[,b])=>b-a);
+  return`<div class="page fi" style="gap:32px;text-align:center;">
     <div>
-      <p style="font-size:11px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:12px;">Fin de partida</p>
+      <p style="font-size:11px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:12px;">Fin de partida · Bralapas</p>
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(44px,10vw,68px);font-weight:700;">Resultados finales</h2>
     </div>
-    <div style="width:100%;max-width:380px;display:flex;flex-direction:column;gap:10px;">
-      ${ranking.map(([nom,pts],i)=>`
-        <div style="background:${i===0?'rgba(255,215,0,.08)':'rgba(255,255,255,.04)'};border:1px solid ${i===0?'rgba(255,215,0,.2)':'rgba(255,255,255,.07)'};border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:14px;">
-          <span style="font-size:22px;">${M[i]||`${i+1}.`}</span>
-          <span style="flex:1;font-size:17px;font-weight:500;text-align:left;">${nom}</span>
-          <span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:${i===0?'#ffd700':'white'};">${pts}</span>
+    <div style="width:100%;max-width:400px;display:flex;flex-direction:column;gap:10px;">
+      ${full.map(([name,pts],i)=>`
+        <div class="rank-row" style="${i===0?'border-color:rgba(255,215,0,.3);background:rgba(255,215,0,.07);':''}">
+          <span style="font-size:${i<3?22:16}px;width:34px;text-align:center;">${MEDALS[i]||`${i+1}.`}</span>
+          <span style="flex:1;font-size:16px;font-weight:${name===S.name?700:400};">${name}${name===S.name?' ←':''}</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:${i===0?'#ffd700':'white'};">${pts}</span>
         </div>`).join('')}
     </div>
     ${isHost?`<button class="btn bw" id="bnueva">Nueva partida</button>`:''}
@@ -482,82 +587,84 @@ function vFin(puntuaciones, isHost) {
 }
 
 // ─── Eventos ──────────────────────────────────────────────────────────────────
-function bind() {
-  // Home
-  $('bhost')?.addEventListener('click', () => { S.mode='hsel'; render(); });
-  $('bjoin')?.addEventListener('click', () => { S.mode='pjoin'; render(); });
-  $('bback')?.addEventListener('click', () => { S.mode='home'; render(); });
-
-  // Host: elegir sección
-  document.querySelectorAll('.scard').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      btn.disabled = true;
-      try {
-        const code = await createRoom(btn.dataset.sid);
-        S.code = code; S.isHost = true;
-        listenRoom(code);
-        S.mode = 'hgame'; render();
-      } catch(e) {
-        btn.disabled = false;
-        alert('Error al crear la sala: ' + e.message);
-      }
-    });
+function bind(){
+  $('bhost')?.addEventListener('click',async()=>{
+    const b=$('bhost'); if(b) b.disabled=true;
+    try{
+      const code=await createRoom();
+      S.code=code; S.isHost=true;
+      listenRoom(code); S.mode='hgame'; render();
+    }catch(e){ if(b) b.disabled=false; alert('Error: '+e.message); }
   });
+  $('bjoin')?.addEventListener('click',()=>{S.mode='pjoin';render();});
+  $('bback')?.addEventListener('click',()=>{S.mode='home';render();});
+  $('bstartlobby')?.addEventListener('click',()=>startLobby());
+  $('bstartsec')?.addEventListener('click',()=>startSection());
+  $('breveal')?.addEventListener('click',()=>revealAnswers());
+  $('bnext')?.addEventListener('click',()=>nextQuestion());
+  $('btogm')?.addEventListener('click',()=>toggleMarcador());
+  $('bnueva')?.addEventListener('click',()=>{sessionStorage.removeItem('brh');S.mode='home';render();});
 
-  // Host: empezar
-  $('bstart')?.addEventListener('click', () => startGame());
-
-  // Host: revelar / siguiente
-  $('breveal')?.addEventListener('click', () => revealAnswers());
-  $('bnext')?.addEventListener('click',   () => nextQuestion());
-  $('bnueva')?.addEventListener('click',  () => { sessionStorage.removeItem('brh'); S.mode='hsel'; render(); });
-
-  // Player: unirse
-  $('icode')?.addEventListener('input', function(){ this.value=this.value.toUpperCase(); });
-  $('bunirse')?.addEventListener('click', async () => {
-    const code = ($('icode')?.value||'').toUpperCase().trim();
-    const name = ($('iname')?.value||'').trim();
-    const err  = $('jerr');
-    if (code.length!==4) { err.textContent='Código de 4 letras'; return; }
-    if (!name)            { err.textContent='Escribe tu nombre';  return; }
-    err.textContent = '';
-    try {
-      await joinRoom(code, name);
+  $('icode')?.addEventListener('input',function(){this.value=this.value.toUpperCase();});
+  $('bunirse')?.addEventListener('click',async()=>{
+    const code=($('icode')?.value||'').toUpperCase().trim();
+    const name=($('iname')?.value||'').trim();
+    const err=$('jerr');
+    if(code.length!==4){err.textContent='Código de 4 letras';return;}
+    if(!name){err.textContent='Escribe tu nombre';return;}
+    err.textContent='';
+    try{
+      await joinRoom(code,name);
       S.code=code; S.name=name; S.isHost=false;
-      listenRoom(code);
-      S.mode='pgame'; render();
-    } catch(e) { err.textContent = e.message; }
+      listenRoom(code); S.mode='pgame'; render();
+    }catch(e){err.textContent=e.message;}
   });
 
-  // Player: responder
-  document.querySelectorAll('.popt').forEach(btn => {
-    btn.addEventListener('click', async () => {
+  document.querySelectorAll('.popt').forEach(btn=>{
+    btn.addEventListener('click',async()=>{
       document.querySelectorAll('.popt').forEach(b=>b.disabled=true);
+      if(S._timerInt){clearInterval(S._timerInt);S._timerInt=null;}
       await sendAnswer(btn.dataset.opt);
     });
   });
 }
 
+// Post-render: start live pts counter on player question screen
+function afterRender(){
+  const sala=S.sala;
+  if(!sala||S.isHost||sala.estado!=='pregunta') return;
+  const miResp=(sala.respuestas||{})[S.name];
+  if(miResp) return; // already answered
+  const el=$('pts-live');
+  if(!el) return;
+  const qIdx=sala.preguntaIdx;
+  if(S._timerInt&&S._lastQIdx===qIdx) return; // timer already running for this question
+  if(S._timerInt) clearInterval(S._timerInt);
+  S._lastQIdx=qIdx;
+  const qst=sala.questionStartTime||Date.now();
+  const tick=()=>{
+    const e=$('pts-live');
+    if(!e){clearInterval(S._timerInt);S._timerInt=null;return;}
+    const elapsed=Math.max(0,(Date.now()-qst)/1000);
+    e.textContent=calcPts(elapsed);
+  };
+  tick();
+  S._timerInt=setInterval(tick,250);
+}
+
 // ─── Init ─────────────────────────────────────────────────────────────────────
-(function init() {
-  const params = new URLSearchParams(location.search);
-  const sala   = params.get('sala');
-
-  // Reconexión del host
-  try {
-    const h = jpar(sessionStorage.getItem('brh'));
-    if (h && !sala) {
-      S.code   = h.code;
-      S.isHost = true;
-      S.sec    = SECS.find(s=>s.id===h.secId);
-      S.orden  = h.orden;
-      S.mode   = 'hgame';
-      listenRoom(h.code);
-      return;
+(function init(){
+  const params=new URLSearchParams(location.search);
+  const sala=params.get('sala');
+  try{
+    const h=jpar(sessionStorage.getItem('brh'));
+    if(h&&!sala){
+      S.code=h.code; S.isHost=true;
+      S.allOrden=h.allOrden;
+      S.mode='hgame'; listenRoom(h.code); return;
     }
-  } catch {}
-
-  S.mode = sala ? 'pjoin' : 'home';
+  }catch{}
+  S.mode=sala?'pjoin':'home';
   render();
 })();
 </script>
