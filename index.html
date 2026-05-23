@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bralapas · Curiosidades</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;-webkit-tap-highlight-color:transparent}
+    body{font-family:'Outfit',sans-serif;background:#08080d;color:white;min-height:100vh}
+    #app{min-height:100vh}
+
+    .page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;gap:28px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0}
+    .pbar{height:3px;background:rgba(255,255,255,.06);flex-shrink:0}
+    .pfill{height:100%;transition:width .5s ease}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:12px;padding:13px 26px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:transform .15s,filter .15s,opacity .15s;border:none}
+    .btn:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.1)}
+    .btn:active:not(:disabled){transform:translateY(0)}
+    .btn:disabled{opacity:.35;cursor:not-allowed}
+    .bw{background:white;color:#000}
+    .bg{background:rgba(255,255,255,.08);color:white;border:1.5px solid rgba(255,255,255,.2)}
+    .bg:hover:not(:disabled){border-color:rgba(255,255,255,.5)}
+
+    .inp{width:100%;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:12px;padding:13px 18px;color:white;font-family:'Outfit',sans-serif;font-size:16px;outline:none;transition:border-color .2s}
+    .inp:focus{border-color:rgba(255,255,255,.4)}
+    .inp::placeholder{color:rgba(255,255,255,.25)}
+
+    .scard{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.09);border-radius:16px;padding:20px 22px;cursor:pointer;text-align:left;color:white;display:flex;align-items:center;gap:16px;transition:border-color .2s,background .2s;width:100%}
+    .scard:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08)}
+
+    .obtn{width:100%;border:none;border-radius:16px;padding:16px 14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Outfit',sans-serif;font-size:clamp(13px,3.2vw,17px);font-weight:600;color:white;min-height:84px;transition:transform .15s,filter .15s}
+    .obtn:hover:not(:disabled){transform:scale(1.03);filter:brightness(1.1)}
+    .obtn:active:not(:disabled){transform:scale(.97)}
+    .obtn:disabled{cursor:default}
+
+    .chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:5px 12px;font-size:13px;display:inline-flex;align-items:center;gap:5px}
+
+    .rank-row{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px}
+
+    .code{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,14vw,80px);font-weight:700;letter-spacing:10px;text-align:center}
+    .linkbox{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 16px;font-size:12px;color:#888;word-break:break-all;text-align:center;max-width:440px}
+
+    @keyframes fi{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    .fi{animation:fi .35s ease forwards}
+    @keyframes pop{0%{transform:scale(.8);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+    .pop{animation:pop .4s ease forwards}
+    h1 {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div id="app"><div style="height:100vh;display:flex;align-items:center;justify-content:center;color:#444;font-family:'Outfit',sans-serif">Cargando…</div></div>
+
+<script type="module">
+import { initializeApp }                               from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getDatabase, ref, set, get, onValue, update } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+
+// ─── Firebase ────────────────────────────────────────────────────────────────
+const db = getDatabase(initializeApp({
+  apiKey:            "AIzaSyD0b9BeFPlMYzqkLcNjnOJdBUIPyYBEh1s",
+  authDomain:        "bralapas-ec72a.firebaseapp.com",
+  databaseURL:       "https://bralapas-ec72a-default-rtdb.firebaseio.com",
+  projectId:         "bralapas-ec72a",
+  storageBucket:     "bralapas-ec72a.firebasestorage.app",
+  messagingSenderId: "611492084884",
+  appId:             "1:611492084884:web:42b93f6dd54ba69e17c881"
+}));
+
+// ─── Datos ───────────────────────────────────────────────────────────────────
+const SECS = [
+  { id:"istria", emoji:"🏛️", title:"Istria a la vista", subtitle:"Curiosidades de Croacia y la península", tipo:"definition", accent:"#c1121f",
+    questions:[
+      {prompt:"Población del interior de Istria, oficialmente reconocida como la ciudad más pequeña del mundo, con apenas una treintena de habitantes.",
+        correct:"Hum", options:["Hum","Motovun","Grožnjan","Roč"]},
+      {prompt:"Anfiteatro romano del siglo I, uno de los seis más grandes que se conservan en el mundo, situado en la mayor ciudad de Istria.",
+        correct:"Arena de Pula", options:["Arena de Pula","Anfiteatro de Salona","Arco de los Sergios","Templo de Augusto"]},
+      {prompt:"Hongo subterráneo blanco extraordinariamente cotizado que se recolecta en otoño en los bosques de Motovun.",
+        correct:"Trufa", options:["Trufa","Boletus","Níscalo","Rebozuelo"]},
+      {prompt:"Variedad de uva autóctona con la que se elabora el vino blanco más característico de Istria.",
+        correct:"Malvasía istriana", options:["Malvasía istriana","Plavac mali","Graševina","Pošip"]},
+      {prompt:"Archipiélago frente a la costa occidental de Istria que fue residencia estival del mariscal Tito y hoy es parque nacional.",
+        correct:"Brijuni", options:["Brijuni","Kornati","Elafiti","Cres"]},
+      {prompt:"Antiguo alfabeto eslavo, utilizado durante siglos en la liturgia y los documentos eclesiásticos de Istria.",
+        correct:"Glagolítico", options:["Glagolítico","Cirílico","Bogomil","Iliriano"]},
+      {prompt:"Sima en el centro de Istria que inspiró a Jules Verne para la huida del protagonista en su novela 'Mathias Sandorf'.",
+        correct:"Cueva de Pazin", options:["Cueva de Pazin","Cueva de Postojna","Sima de Premantura","Gruta de Učka"]},
+      {prompt:"Entrante de mar de unos 10 km en la costa oeste de Istria, popularmente llamado 'fiordo' aunque en realidad es una ría.",
+        correct:"Canal de Lim", options:["Canal de Lim","Bahía de Kvarner","Estrecho de Veliki","Río Mirna"]},
+      {prompt:"Basílica paleocristiana del siglo VI en Poreč, Patrimonio de la Humanidad por sus mosaicos bizantinos.",
+        correct:"Eufrasiana", options:["Eufrasiana","San Donato","Santa María Mayor","San Quirino"]},
+      {prompt:"Prenda de origen militar croata que dio nombre, a través del francés, a la corbata moderna.",
+        correct:"Kravata", options:["Kravata","Lanjac","Marama","Šal"]},
+    ]},
+
+  { id:"venecia", emoji:"🦁", title:"Serenísima", subtitle:"Curiosidades de Venecia", tipo:"definition", accent:"#d4a017",
+    questions:[
+      {prompt:"Color al que las leyes suntuarias del siglo XVI obligaron a pintar todas las góndolas para frenar el lujo ostentoso.",
+        correct:"Negro", options:["Negro","Rojo","Dorado","Blanco"]},
+      {prompt:"Compositor barroco, ordenado sacerdote, que escribió gran parte de su obra para las niñas del Ospedale della Pietà.",
+        correct:"Vivaldi", options:["Vivaldi","Monteverdi","Albinoni","Gabrieli"]},
+      {prompt:"Ciudad de la que las tropas venecianas saquearon en 1204 los cuatro caballos de bronce dorado que coronaron San Marcos durante siglos.",
+        correct:"Constantinopla", options:["Constantinopla","Alejandría","Atenas","Acre"]},
+      {prompt:"Buzones con forma de cabeza de león, repartidos por la ciudad, en los que se depositaban denuncias anónimas a las autoridades.",
+        correct:"Bocche di leone", options:["Bocche di leone","Bocche della verità","Bocche del doge","Bocche di Marco"]},
+      {prompt:"Astrónomo que en 1609 mostró su telescopio a las autoridades venecianas desde lo alto del Campanile de San Marcos.",
+        correct:"Galileo", options:["Galileo","Copérnico","Kepler","Cassini"]},
+      {prompt:"Bar veneciano fundado en 1931 donde nació el cóctel de prosecco y melocotón bautizado como Bellini.",
+        correct:"Harry's Bar", options:["Harry's Bar","Caffè Florian","Caffè Quadri","Locanda Cipriani"]},
+      {prompt:"Nombre de la pleamar excepcional que inunda periódicamente Venecia, sobre todo en otoño e invierno.",
+        correct:"Acqua alta", options:["Acqua alta","Aqua morta","Marea piena","Bora granda"]},
+      {prompt:"Complejo militar e industrial de Venecia, fundado en el siglo XII, considerado uno de los mayores centros de producción preindustriales.",
+        correct:"Arsenale", options:["Arsenale","Fondaco","Squero","Magazzino"]},
+      {prompt:"Sistema de barreras móviles que protege la laguna de Venecia frente a las mareas excepcionales, operativo desde 2020.",
+        correct:"MOSE", options:["MOSE","ACQUA","LIDO","ARGO"]},
+      {prompt:"Isla de la laguna veneciana mundialmente conocida por la fabricación tradicional de encaje desde el siglo XVI.",
+        correct:"Burano", options:["Burano","Murano","Torcello","Sant'Erasmo"]},
+    ]},
+
+  { id:"nantes", emoji:"🎭", title:"Nantes al revés", subtitle:"Atención: aquí gana quien miente", tipo:"definition", accent:"#7b2cbf",
+    questions:[
+      // En esta sección la "correcta" es FALSA: la verdadera está entre las opciones, pero no puntúa.
+      {prompt:"Región administrativa francesa a la que pertenece Nantes en la actualidad.",
+        correct:"Bretaña", options:["Bretaña","Pays de la Loire","Normandía","Centro-Valle del Loira"]},
+      {prompt:"Año en el que Enrique IV firmó el Edicto de Nantes, que concedía libertades religiosas a los hugonotes.",
+        correct:"1685", options:["1572","1598","1610","1685"]},
+      {prompt:"Galleta industrial emblemática inventada en Nantes por la marca LU en 1886.",
+        correct:"Madeleine", options:["Madeleine","Petit Beurre","Palmera","Bizcocho de Saboya"]},
+      {prompt:"Escritor francés del siglo XIX nacido en Nantes, autor entre otros de 'Veinte mil leguas de viaje submarino'.",
+        correct:"Victor Hugo", options:["Victor Hugo","Jules Verne","Alexandre Dumas","Émile Zola"]},
+      {prompt:"Compañía de teatro callejero fundada en 1979 y conocida por desfilar marionetas mecánicas gigantes por las calles de Nantes.",
+        correct:"Cirque du Soleil", options:["Cirque du Soleil","Royal de Luxe","La Fura dels Baus","Compagnie Off"]},
+      {prompt:"Pasaje comercial cubierto de Nantes, inaugurado en 1843, joya de la arquitectura del siglo XIX.",
+        correct:"Galerie Vivienne", options:["Galerie Vivienne","Passage Pommeraye","Passage Jouffroy","Galerie Colbert"]},
+      {prompt:"Castillo histórico situado en el centro de Nantes, residencia de los duques de la región.",
+        correct:"Castillo de Angers", options:["Castillo de Angers","Castillo de los Duques de Bretaña","Castillo de Saumur","Palacio Ducal"]},
+      {prompt:"Duquesa de Bretaña nacida en Nantes en 1477, que llegó a ser dos veces reina consorte de Francia.",
+        correct:"Catalina de Médici", options:["Catalina de Médici","Ana de Bretaña","Margarita de Valois","Claudia de Francia"]},
+      {prompt:"Denominación del vino blanco seco producido al sur de Nantes, tradicional acompañante de mariscos.",
+        correct:"Sancerre", options:["Sancerre","Muscadet","Chablis","Pouilly-Fumé"]},
+      {prompt:"Torre emblemática de Nantes, antigua chimenea de una fábrica de galletas reconvertida en mirador.",
+        correct:"Tour Bretagne", options:["Tour Bretagne","Tour LU","Tour Pommeraye","Tour des Ducs"]},
+    ]}
+];
+
+const OPTS=[{bg:"#e63946",sh:"▲"},{bg:"#4361ee",sh:"◆"},{bg:"#f4a261",sh:"●"},{bg:"#52b788",sh:"■"}];
+const MEDALS=['🥇','🥈','🥉'];
+
+// ─── Utils ───────────────────────────────────────────────────────────────────
+const shuffle = a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;};
+const code4   = ()=>Array.from({length:4},()=>'BCDFGHJKLMNPQRSTVWXYZ'[0|Math.random()*21]).join('');
+const $       = id=>document.getElementById(id);
+const jstr    = JSON.stringify;
+const jpar    = v=>{try{return JSON.parse(v);}catch{return null;}};
+const calcPts = (elapsed)=>Math.max(50, 100 - Math.floor(Math.max(0, elapsed-3))*3);
+
+// ─── Estado ──────────────────────────────────────────────────────────────────
+const S={
+  mode:'home',  // home | hgame | pjoin | pgame
+  code:null, name:null, isHost:false,
+  sala:null,
+  allOrden:null,  // [{secId,qIdx},...] full game order (host only)
+  _ans:null,      // correct answer for current q (host only)
+  unsub:null,
+  _timerInt:null, // interval for pts countdown (player only)
+  _lastQIdx:-1,   // last rendered preguntaIdx (for timer)
+};
+
+// ─── Firebase ops ─────────────────────────────────────────────────────────────
+async function createRoom(){
+  const code=code4();
+  // Order: each section in turn, with questions shuffled within the section.
+  const allOrden=SECS.flatMap(sec=>
+    shuffle(sec.questions.map((_,i)=>({secId:sec.id, qIdx:i})))
+  );
+  await set(ref(db,`salas/${code}`),{
+    orden:jstr(allOrden), total:allOrden.length,
+    estado:'lobby', seccionId:SECS[0].id, preguntaIdx:0,
+    prompt:null, opciones:null, tipo:null,
+    correcto:null, questionStartTime:null,
+    respuestas:null, tiempos:null,
+    puntuaciones:null, jugadores:null, marcador:false,
+  });
+  S.allOrden=allOrden;
+  sessionStorage.setItem('brh',jstr({code,allOrden}));
+  return code;
+}
+
+async function joinRoom(code,name){
+  const snap=await get(ref(db,`salas/${code}`));
+  if(!snap.exists()) throw new Error('Sala no encontrada');
+  const sala=snap.val();
+  if(sala.estado==='fin') throw new Error('La partida ya ha terminado');
+  if(sala.jugadores?.[name]) throw new Error('Ese nombre ya está en uso');
+  await update(ref(db,`salas/${code}`),{[`jugadores/${name}`]:true,[`puntuaciones/${name}`]:0});
+}
+
+function listenRoom(code){
+  if(S.unsub) S.unsub();
+  S.unsub=onValue(ref(db,`salas/${code}`),snap=>{
+    S.sala=snap.exists()?snap.val():null;
+    if(S.sala&&S.isHost&&S.allOrden){
+      const {secId,qIdx}=S.allOrden[S.sala.preguntaIdx];
+      S._ans=SECS.find(s=>s.id===secId)?.questions[qIdx]?.correct||null;
+    }
+    render();
+  });
+}
+
+async function startLobby(){
+  // Go to first section intro
+  await update(ref(db,`salas/${S.code}`),{estado:'seccion-intro',seccionId:SECS[0].id,preguntaIdx:0});
+}
+
+async function startSection(){
+  const {secId,qIdx}=S.allOrden[S.sala.preguntaIdx];
+  const sec=SECS.find(s=>s.id===secId);
+  const q=sec.questions[qIdx];
+  const opts=shuffle(q.options);
+  S._ans=q.correct;
+  await update(ref(db,`salas/${S.code}`),{
+    estado:'pregunta', seccionId:secId, tipo:sec.tipo,
+    prompt:q.prompt, opciones:jstr(opts),
+    correcto:null, respuestas:null, tiempos:null,
+    questionStartTime:Date.now(), marcador:false,
+  });
+}
+
+async function revealAnswers(){
+  const {sala,_ans,code}=S;
+  const resps =sala.respuestas||{};
+  const tiempos=sala.tiempos||{};
+  const pts   =sala.puntuaciones||{};
+  const qst   =sala.questionStartTime||Date.now();
+  const upd   ={estado:'revelando',correcto:_ans};
+  Object.entries(resps).forEach(([name,opt])=>{
+    if(opt===_ans){
+      const elapsed=Math.max(0,(tiempos[name]-qst)/1000);
+      upd[`puntuaciones/${name}`]=(pts[name]||0)+calcPts(elapsed);
+    }
+  });
+  await update(ref(db,`salas/${code}`),upd);
+}
+
+async function nextQuestion(){
+  const {sala,allOrden,code}=S;
+  const nextIdx=sala.preguntaIdx+1;
+  if(nextIdx>=sala.total){
+    await update(ref(db,`salas/${code}`),{estado:'fin',marcador:false});
+    return;
+  }
+  const curSecId=allOrden[sala.preguntaIdx].secId;
+  const nxtSecId=allOrden[nextIdx].secId;
+  if(nxtSecId!==curSecId){
+    await update(ref(db,`salas/${code}`),{
+      estado:'seccion-intro',seccionId:nxtSecId,preguntaIdx:nextIdx,
+      correcto:null,respuestas:null,tiempos:null,marcador:false,
+    });
+  } else {
+    const {secId,qIdx}=allOrden[nextIdx];
+    const sec=SECS.find(s=>s.id===secId);
+    const q=sec.questions[qIdx];
+    const opts=shuffle(q.options);
+    S._ans=q.correct;
+    await update(ref(db,`salas/${code}`),{
+      estado:'pregunta',preguntaIdx:nextIdx,
+      prompt:q.prompt,opciones:jstr(opts),
+      correcto:null,respuestas:null,tiempos:null,
+      questionStartTime:Date.now(),marcador:false,
+    });
+  }
+}
+
+async function toggleMarcador(){
+  await update(ref(db,`salas/${S.code}`),{marcador:!S.sala.marcador});
+}
+
+async function sendAnswer(opt){
+  await update(ref(db,`salas/${S.code}`),{
+    [`respuestas/${S.name}`]:opt,
+    [`tiempos/${S.name}`]:Date.now(),
+  });
+}
+
+// ─── Render ───────────────────────────────────────────────────────────────────
+function render(){
+  const app=document.getElementById('app');
+  if(!S.sala&&(S.mode==='hgame'||S.mode==='pgame')){
+    app.innerHTML=`<div class="page fi" style="text-align:center;gap:20px;">
+      <div style="font-size:48px;">🔌</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;">Sala no encontrada</h2>
+      <button class="btn bw" id="bh">Volver al inicio</button></div>`;
+    $('bh')?.addEventListener('click',()=>{S.mode='home';S.sala=null;render();});
+    return;
+  }
+  switch(S.mode){
+    case 'home':  app.innerHTML=vHome();   break;
+    case 'hgame': app.innerHTML=vHGame();  break;
+    case 'pjoin': app.innerHTML=vPJoin();  break;
+    case 'pgame': app.innerHTML=vPGame();  break;
+  }
+  bind();
+  afterRender();
+}
+
+// ─── Vistas ───────────────────────────────────────────────────────────────────
+
+function vHome(){
+  return`<div class="page fi" style="text-align:center;">
+    <div>
+      <p style="font-size:11px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:16px;">Tres ciudades, una partida</p>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(60px,14vw,100px);font-weight:700;line-height:1;margin-bottom:16px;">Bralapas</h1>
+      <p style="color:#555;font-size:15px;">Istria · Venecia · Nantes</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:300px;">
+      <button class="btn bw" id="bhost">Crear partida</button>
+      <button class="btn bg" id="bjoin">Unirme a una partida</button>
+    </div>
+  </div>`;
+}
+
+// ── Host game (handles all host states) ────────────────────────────────────────
+function vHGame(){
+  const sala=S.sala;
+  if(!sala) return`<div class="page"><p style="color:#555">Cargando…</p></div>`;
+  const {estado,preguntaIdx,prompt,correcto,tipo,total,marcador}=sala;
+  const opciones=jpar(sala.opciones)||[];
+  const respuestas=sala.respuestas||{};
+  const tiempos=sala.tiempos||{};
+  const puntuaciones=sala.puntuaciones||{};
+  const jugadores=Object.keys(sala.jugadores||{});
+  const respondidos=Object.keys(respuestas).length;
+  const sec=SECS.find(s=>s.id===sala.seccionId);
+  const secIdx=SECS.findIndex(s=>s.id===sala.seccionId);
+  const isRev=estado==='revelando';
+  const qst=sala.questionStartTime||0;
+
+  // Marcador overlay
+  if(marcador) return vMarcador(puntuaciones,jugadores,sala,true);
+
+  // Lobby
+  if(estado==='lobby'){
+    const link=`${location.origin}${location.pathname}?sala=${S.code}`;
+    return`<div class="page fi" style="text-align:center;">
+      <div>
+        <p style="font-size:11px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:14px;">Código de sala</p>
+        <div class="code">${S.code}</div>
+        <p style="color:#555;font-size:13px;margin-top:12px;">Enlace para los jugadores:</p>
+        <div class="linkbox" style="margin-top:8px;">${link}</div>
+      </div>
+      <div style="width:100%;max-width:440px;">
+        <p style="font-size:11px;letter-spacing:3px;color:#555;text-transform:uppercase;margin-bottom:12px;">Jugadores (${jugadores.length})</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:36px;">
+          ${jugadores.length?jugadores.map(p=>`<span class="chip">${p}</span>`).join('')
+            :`<p style="color:#444;font-style:italic;font-size:14px;">Esperando jugadores…</p>`}
+        </div>
+      </div>
+      <p style="font-size:13px;color:#555;max-width:380px;text-align:center;">Os lo vais a pasar guay... espero</p>
+      <button class="btn bw" id="bstartlobby" ${jugadores.length===0?'disabled':''}>Empezar →</button>
+    </div>`;
+  }
+
+  // Section intro
+  if(estado==='seccion-intro'){
+    const ranking=Object.entries(puntuaciones).sort(([,a],[,b])=>b-a);
+    const isFirst=secIdx===0&&Object.values(puntuaciones).every(v=>v===0);
+    return`<div class="page fi" style="text-align:center;gap:24px;">
+      <div>
+        <p style="font-size:11px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:10px;">Sección ${secIdx+1} de ${SECS.length}</p>
+        <div style="font-size:52px;margin-bottom:10px;">${sec.emoji}</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,10vw,60px);font-weight:700;">${sec.title}</h2>
+        <p style="color:#666;font-size:14px;margin-top:6px;">${sec.subtitle}</p>
+      </div>
+      ${!isFirst&&ranking.length?`
+      <div style="width:100%;max-width:400px;">
+        <p style="font-size:11px;letter-spacing:3px;color:#555;text-transform:uppercase;margin-bottom:12px;">Clasificación actual</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${ranking.map(([n,p],i)=>`
+            <div class="rank-row" style="${i===0?'border-color:rgba(255,215,0,.25);background:rgba(255,215,0,.06);':''}">
+              <span style="width:28px;font-size:16px;">${MEDALS[i]||`${i+1}.`}</span>
+              <span style="flex:1;font-size:15px;font-weight:500;">${n}</span>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:${sec.accent};">${p}</span>
+            </div>`).join('')}
+        </div>
+      </div>`:``}
+      <button class="btn bw" id="bstartsec">
+        ${isFirst?'¡Empezar partida! →':'Empezar sección →'}
+      </button>
+    </div>`;
+  }
+
+  // Fin
+  if(estado==='fin') return vFin(puntuaciones,true);
+
+  // Pregunta / Revelando
+  return`<div style="min-height:100vh;display:flex;flex-direction:column;background:#08080d;">
+    <div class="topbar">
+      <span style="font-size:13px;color:#666;">${sec?.emoji} ${sec?.title}</span>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <button class="btn bg" id="btogm" style="padding:8px 14px;font-size:12px;">📊 Marcador</button>
+        ${isRev?`<button class="btn bw" id="bnext" style="padding:9px 18px;font-size:13px;">
+          ${preguntaIdx+1<total?'Siguiente →':'Ver resultados →'}</button>`
+          :`<button class="btn bw" id="breveal" style="padding:9px 18px;font-size:13px;">Revelar (${respondidos}/${jugadores.length})</button>`}
+      </div>
+    </div>
+    <div class="pbar"><div class="pfill" style="width:${(preguntaIdx/total)*100}%;background:${sec?.accent};"></div></div>
+
+    <div class="fi" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 24px;max-width:760px;margin:0 auto;width:100%;gap:24px;">
+
+      ${tipo==='word'
+        ?`<div style="font-family:'Outfit',serif;font-size:clamp(72px,16vw,110px);font-weight:700;text-align:center;">${prompt}</div>`
+        :`<div style="font-family:'Outfit',serif;font-size:clamp(22px,3.2vw,30px);font-style:bold;line-height:1.65;border-left:3px solid ${sec?.accent};padding-left:20px;">${prompt}</div>`
+      }
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;">
+        ${opciones.map((opt,i)=>{
+          const c=OPTS[i];
+          const voters=Object.entries(respuestas).filter(([,v])=>v===opt);
+          const isCorrect=isRev&&opt===correcto;
+          const isWrong=isRev&&opt!==correcto;
+          return`<div style="background:${isRev?(isCorrect?'rgba(82,183,136,.15)':'rgba(255,255,255,.04)'):c.bg+'18'};border:2px solid ${isRev?(isCorrect?'#52b788':'rgba(255,255,255,.08)'):c.bg+'88'};border-radius:12px;padding:14px 16px;transition:all .3s;opacity:${isWrong?.45:1};">
+            <div style="display:flex;align-items:center;gap:9px;">
+              <span style="color:${c.bg};font-size:13px;">${c.sh}</span>
+              <span style="font-weight:600;font-size:14px;flex:1;color:${isCorrect?'#b7e4c7':'white'}">${opt}</span>
+              ${isCorrect?'<span style="color:#52b788;font-size:16px;">✓</span>':''}
+            </div>
+            ${isRev&&voters.length?`<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;">
+              ${voters.map(([name])=>{
+                const elapsed=Math.max(0,(tiempos[name]-qst)/1000);
+                const pts=isCorrect?calcPts(elapsed):0;
+                return`<span class="chip" style="font-size:11px;color:${isCorrect?'#52b788':'#e63946'};">
+                  ${name}${isCorrect?` +${pts}`:' ✗'}</span>`;
+              }).join('')}
+            </div>`:''}
+          </div>`;
+        }).join('')}
+      </div>
+
+      ${!isRev?`<p style="color:#555;font-size:13px;text-align:center;">Esperando respuestas…</p>`:''}
+    </div>
+  </div>`;
+}
+
+// ── Player join ──────────────────────────────────────────────────────────────
+function vPJoin(){
+  const paramSala=new URLSearchParams(location.search).get('sala')||'';
+  return`<div class="page fi" style="text-align:center;">
+    <div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(52px,12vw,80px);font-weight:700;margin-bottom:12px;">Bralapas</h1>
+      <p style="color:#555;font-size:15px;">Introduce tus datos para unirte</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:300px;">
+      <input class="inp" id="icode" placeholder="CÓDIGO" value="${paramSala}" maxlength="4"
+        style="text-transform:uppercase;letter-spacing:8px;font-size:22px;text-align:center;font-family:'Cormorant Garamond',serif;font-weight:700;">
+      <input class="inp" id="iname" placeholder="Tu nombre" maxlength="16">
+      <button class="btn bw" id="bunirse">Unirme →</button>
+      <p id="jerr" style="color:#e63946;font-size:13px;min-height:18px;"></p>
+    </div>
+    <button class="btn bg" id="bback">← Volver</button>
+  </div>`;
+}
+
+// ── Player game (handles all player states) ───────────────────────────────────
+function vPGame(){
+  const sala=S.sala;
+  if(!sala) return`<div class="page"><p style="color:#555">Cargando…</p></div>`;
+  const {estado,preguntaIdx,prompt,correcto,tipo,total,marcador}=sala;
+  const opciones=jpar(sala.opciones)||[];
+  const respuestas=sala.respuestas||{};
+  const puntuaciones=sala.puntuaciones||{};
+  const miResp=respuestas[S.name];
+  const miPts=puntuaciones[S.name]||0;
+  const sec=SECS.find(s=>s.id===sala.seccionId);
+  const secIdx=SECS.findIndex(s=>s.id===sala.seccionId);
+
+  // Marcador overlay
+  if(marcador) return vMarcador(puntuaciones,Object.keys(sala.jugadores||{}),sala,false);
+
+  // Lobby
+  if(estado==='lobby') return`<div class="page fi" style="gap:24px;text-align:center;">
+    <div style="font-size:52px;">🎮</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;">¡Conectado!</h2>
+    <p style="color:#555;">Esperando al host…</p>
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 28px;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;letter-spacing:8px;">${S.code}</span>
+    </div>
+    <span class="chip">${S.name}</span>
+  </div>`;
+
+  // Section intro
+  if(estado==='seccion-intro') return`<div class="page fi" style="text-align:center;gap:24px;">
+    <div>
+      <p style="font-size:11px;letter-spacing:4px;color:#555;text-transform:uppercase;margin-bottom:8px;">Sección ${secIdx+1} de ${SECS.length}</p>
+      <div style="font-size:52px;margin-bottom:10px;">${sec.emoji}</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,9vw,52px);font-weight:700;">${sec.title}</h2>
+      <p style="color:#666;font-size:14px;margin-top:6px;">${sec.subtitle}</p>
+    </div>
+    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 28px;text-align:center;">
+      <p style="font-size:12px;color:#666;margin-bottom:6px;">Tu puntuación</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700;color:${sec.accent};">${miPts}</p>
+    </div>
+    <p style="color:#555;font-size:14px;">El host empezará en breve…</p>
+  </div>`;
+
+  // Fin
+  if(estado==='fin') return vFin(puntuaciones,false);
+
+  // Topbar común durante el juego
+  const topbar=`<div class="topbar">
+    <span style="font-size:13px;color:#666;">${S.name}</span>
+    <div style="display:flex;gap:16px;align-items:center;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:${sec?.accent};">${miPts} pts</span>
+    </div>
+  </div>
+  <div class="pbar"><div class="pfill" style="width:${(preguntaIdx/total)*100}%;background:${sec?.accent};"></div></div>`;
+
+  // Revelando
+  if(estado==='revelando'){
+    const ok=miResp&&miResp===correcto;
+    const bad=miResp&&miResp!==correcto;
+    const elapsed=miResp&&sala.tiempos?.[S.name]?Math.max(0,(sala.tiempos[S.name]-(sala.questionStartTime||0))/1000):0;
+    const earned=ok?calcPts(elapsed):0;
+    return`<div style="min-height:100vh;display:flex;flex-direction:column;background:${ok?'#071a10':bad?'#190808':'#08080d'};">
+      ${topbar}
+      <div class="fi" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:32px 24px;text-align:center;">
+        <div style="font-size:68px;">${ok?'🎉':bad?'😬':'🤷'}</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,9vw,52px);font-weight:700;color:${ok?'#52b788':bad?'#e63946':'#888'};">
+          ${ok?'¡Correcto!':bad?'Incorrecto':'Sin respuesta'}
+        </h2>
+        ${ok?`<div class="pop" style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:#52b788;">+${earned}</div>`:
+          (!ok&&correcto?`<p style="color:#888;">Era: <strong style="color:white;">${correcto}</strong></p>`:'')
+        }
+        <p style="color:#555;font-size:14px;margin-top:4px;">Esperando al host…</p>
+      </div>
+    </div>`;
+  }
+
+  // Respondido, esperando revelación
+  if(miResp) return`<div style="min-height:100vh;display:flex;flex-direction:column;">
+    ${topbar}
+    <div class="fi" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center;padding:32px 24px;">
+      <div style="font-size:52px;">⏳</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;">¡Enviado!</h2>
+      <div style="background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.15);border-radius:14px;padding:14px 28px;font-size:17px;font-weight:600;">${miResp}</div>
+      <p style="color:#555;font-size:14px;">Esperando al host para revelar…</p>
+    </div>
+  </div>`;
+
+  // Pregunta activa: botones grandes
+  return`<div style="min-height:100vh;display:flex;flex-direction:column;">
+    ${topbar}
+    <div class="fi" style="flex:1;display:flex;flex-direction:column;padding:14px 16px 20px;gap:12px;">
+      <div style="text-align:center;background:rgba(255,255,255,.04);border-radius:14px;padding:16px;display:flex;align-items:center;justify-content:center;min-height:60px;">
+        ${tipo==='word'
+          ?`<div style="font-family:'Outfit',serif;font-size:clamp(62px,14vw,96px);font-weight:700;">${prompt}</div>`
+          :`<div style="font-size:clamp(17px,3vw,22px);color:#ccc;font-style:bold;line-height:1.55;">${prompt}</div>`
+        }
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1;align-content:stretch;max-height:260px">
+        ${opciones.map((opt,i)=>`
+          <button class="obtn popt" data-opt="${opt}" style="background:${OPTS[i].bg};">
+            <span style="font-size:17px;">${OPTS[i].sh}</span><span>${opt}</span>
+          </button>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Marcador (shared) ─────────────────────────────────────────────────────────
+function vMarcador(puntuaciones,jugadores,sala,isHost){
+  const ranking=Object.entries(puntuaciones).sort(([,a],[,b])=>b-a);
+  const sec=SECS.find(s=>s.id===sala?.seccionId);
+  // Include players with 0 points not in puntuaciones
+  const todos=new Set([...Object.keys(puntuaciones),...jugadores]);
+  const full=[...todos].map(n=>[n,puntuaciones[n]||0]).sort(([,a],[,b])=>b-a);
+  return`<div style="min-height:100vh;display:flex;flex-direction:column;background:#08080d;">
+    <div class="topbar">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;">📊 Clasificación</span>
+      ${isHost?`<button class="btn bg" id="btogm" style="padding:8px 14px;font-size:12px;">Ocultar</button>`:''}
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;gap:12px;">
+      <div style="width:100%;max-width:440px;display:flex;flex-direction:column;gap:10px;">
+        ${full.map(([name,pts],i)=>`
+          <div class="rank-row fi" style="animation-delay:${i*0.06}s;${i===0?'border-color:rgba(255,215,0,.3);background:rgba(255,215,0,.07);':''}">
+            <span style="font-size:${i<3?22:16}px;width:34px;text-align:center;">${MEDALS[i]||`${i+1}.`}</span>
+            <span style="flex:1;font-size:16px;font-weight:${name===S.name?700:400};">${name}${name===S.name?' ←':''}</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:${i===0?'#ffd700':sec?.accent||'white'};">${pts}</span>
+          </div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Fin (shared) ──────────────────────────────────────────────────────────────
+function vFin(puntuaciones,isHost){
+  const jugadores=Object.keys(S.sala?.jugadores||{});
+  const todos=new Set([...Object.keys(puntuaciones),...jugadores]);
+  const full=[...todos].map(n=>[n,puntuaciones[n]||0]).sort(([,a],[,b])=>b-a);
+  return`<div class="page fi" style="gap:32px;text-align:center;">
+    <div>
+      <p style="font-size:11px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:12px;">Fin de partida · Bralapas</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(44px,10vw,68px);font-weight:700;">Resultados finales</h2>
+    </div>
+    <div style="width:100%;max-width:400px;display:flex;flex-direction:column;gap:10px;">
+      ${full.map(([name,pts],i)=>`
+        <div class="rank-row" style="${i===0?'border-color:rgba(255,215,0,.3);background:rgba(255,215,0,.07);':''}">
+          <span style="font-size:${i<3?22:16}px;width:34px;text-align:center;">${MEDALS[i]||`${i+1}.`}</span>
+          <span style="flex:1;font-size:16px;font-weight:${name===S.name?700:400};">${name}${name===S.name?' ←':''}</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:${i===0?'#ffd700':'white'};">${pts}</span>
+        </div>`).join('')}
+    </div>
+    ${isHost?`<button class="btn bw" id="bnueva">Nueva partida</button>`:''}
+  </div>`;
+}
+
+// ─── Eventos ──────────────────────────────────────────────────────────────────
+function bind(){
+  $('bhost')?.addEventListener('click',async()=>{
+    const b=$('bhost'); if(b) b.disabled=true;
+    try{
+      const code=await createRoom();
+      S.code=code; S.isHost=true;
+      listenRoom(code); S.mode='hgame'; render();
+    }catch(e){ if(b) b.disabled=false; alert('Error: '+e.message); }
+  });
+  $('bjoin')?.addEventListener('click',()=>{S.mode='pjoin';render();});
+  $('bback')?.addEventListener('click',()=>{S.mode='home';render();});
+  $('bstartlobby')?.addEventListener('click',()=>startLobby());
+  $('bstartsec')?.addEventListener('click',()=>startSection());
+  $('breveal')?.addEventListener('click',()=>revealAnswers());
+  $('bnext')?.addEventListener('click',()=>nextQuestion());
+  $('btogm')?.addEventListener('click',()=>toggleMarcador());
+  $('bnueva')?.addEventListener('click',()=>{sessionStorage.removeItem('brh');S.mode='home';render();});
+
+  $('icode')?.addEventListener('input',function(){this.value=this.value.toUpperCase();});
+  $('bunirse')?.addEventListener('click',async()=>{
+    const code=($('icode')?.value||'').toUpperCase().trim();
+    const name=($('iname')?.value||'').trim();
+    const err=$('jerr');
+    if(code.length!==4){err.textContent='Código de 4 letras';return;}
+    if(!name){err.textContent='Escribe tu nombre';return;}
+    err.textContent='';
+    try{
+      await joinRoom(code,name);
+      S.code=code; S.name=name; S.isHost=false;
+      listenRoom(code); S.mode='pgame'; render();
+    }catch(e){err.textContent=e.message;}
+  });
+
+  document.querySelectorAll('.popt').forEach(btn=>{
+    btn.addEventListener('click',async()=>{
+      document.querySelectorAll('.popt').forEach(b=>b.disabled=true);
+      if(S._timerInt){clearInterval(S._timerInt);S._timerInt=null;}
+      await sendAnswer(btn.dataset.opt);
+    });
+  });
+}
+
+// Post-render: start live pts counter on player question screen
+function afterRender(){
+  const sala=S.sala;
+  if(!sala||S.isHost||sala.estado!=='pregunta') return;
+  const miResp=(sala.respuestas||{})[S.name];
+  if(miResp) return; // already answered
+  const el=$('pts-live');
+  if(!el) return;
+  const qIdx=sala.preguntaIdx;
+  if(S._timerInt&&S._lastQIdx===qIdx) return; // timer already running for this question
+  if(S._timerInt) clearInterval(S._timerInt);
+  S._lastQIdx=qIdx;
+  const qst=sala.questionStartTime||Date.now();
+  const tick=()=>{
+    const e=$('pts-live');
+    if(!e){clearInterval(S._timerInt);S._timerInt=null;return;}
+    const elapsed=Math.max(0,(Date.now()-qst)/1000);
+    e.textContent=calcPts(elapsed);
+  };
+  tick();
+  S._timerInt=setInterval(tick,250);
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+(function init(){
+  const params=new URLSearchParams(location.search);
+  const sala=params.get('sala');
+  try{
+    const h=jpar(sessionStorage.getItem('brh'));
+    if(h&&!sala){
+      S.code=h.code; S.isHost=true;
+      S.allOrden=h.allOrden;
+      S.mode='hgame'; listenRoom(h.code); return;
+    }
+  }catch{}
+  S.mode=sala?'pjoin':'home';
+  render();
+})();
+</script>
+</body>
+</html>
