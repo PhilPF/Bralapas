@@ -47,6 +47,9 @@
     .fi{animation:fi .35s ease forwards}
     @keyframes pop{0%{transform:scale(.8);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
     .pop{animation:pop .4s ease forwards}
+    h1 {
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -69,44 +72,44 @@ const db = getDatabase(initializeApp({
 
 // ─── Datos ───────────────────────────────────────────────────────────────────
 const SECS = [
-  { id:"plantas", emoji:"🌿", title:"Plantas", subtitle:"¿Cuál es la palabra real?", tipo:"definition", accent:"#52b788",
+  { id:"plantas", emoji:"🌿", title:"Tocar hierba", subtitle:"¿Cuál es la palabra real?", tipo:"definition", accent:"#52b788",
     questions:[
-      {prompt:"Masa de pelos blanquecinos y densos que recubren tallos y hojas, dándoles aspecto lanoso.",correct:"Tomento",options:["Tomento","Velema","Flocelo","Lanosema"]},
-      {prompt:"Pequeño apéndice foliáceo que aparece en pares en la base del pecíolo de una hoja.",correct:"Estípula",options:["Estípula","Foliela","Axilema","Bracteína"]},
-      {prompt:"Pecíolo aplanado y ensanchado que sustituye funcionalmente a la lámina foliar.",correct:"Filodio",options:["Filodio","Laminodio","Peciolema","Cladema"]},
-      {prompt:"Estructura en forma de capuchón que protege el meristemo apical de la raíz.",correct:"Caliptra",options:["Caliptra","Rizópilo","Radicúpula","Meristocapa"]},
+      {prompt:"Pelos blanquecinos y densos que recubren tallos y hojas, dándoles aspecto lanoso.",correct:"Tomento",options:["Tomento","Velema","Flocelo","Lanosema"]},
+      {prompt:"Pequeño apéndice que aparece en pares en la base del tallo de una hoja.",correct:"Estípula",options:["Estípula","Foliela","Axilema","Bractemo"]},
+      {prompt:"Apéndice que se desarrolla con un perfil delgado y extendido para realizar las funciones vitales.",correct:"Filodio",options:["Filodio","Laminodio","Peciolema","Cladema"]},
+      {prompt:"Estructura en forma de capuchón que protege la punta de la raíz.",correct:"Caliptra",options:["Caliptra","Rizópilo","Radicúpula","Meristocapa"]},
       {prompt:"Momento en que una flor alcanza su plena apertura y está en condiciones de reproducción.",correct:"Antesis",options:["Antesis","Floresis","Antofisis","Efloresis"]},
-      {prompt:"Capa externa y resistente de la pared del grano de polen; persiste en el registro fósil.",correct:"Exina",options:["Exina","Polinina","Extícula","Esporema"]},
-      {prompt:"Cualquier estructura —semilla, espora, fragmento— capaz de originar un nuevo individuo.",correct:"Propágulo",options:["Propágulo","Germinema","Dispersema","Propicula"]},
-      {prompt:"Tejido vegetal de sostén con células de paredes gruesas y lignificadas, muertas en la madurez.",correct:"Esclerénquima",options:["Esclerénquima","Lignénquima","Fibrenquima","Durenquima"]},
-      {prompt:"Apéndice articulado con función sensorial en la zona bucal de insectos y arácnidos.",correct:"Palpo",options:["Palpo","Sensorino","Tactema","Palema"]},
+      {prompt:"Capa externa, dura y altamente resistente que cubre los granos de polen.",correct:"Exina",options:["Exina","Polinina","Extícula","Espórico"]},
+      {prompt:"Cualquier estructura (semilla, espora, fragmento, ...) capaz de originar un nuevo individuo.",correct:"Propágulo",options:["Propágulo","Germinema","Dispersema","Propicula"]},
+      {prompt:"Tejido de sostén de las plantas adultas que han dejado de crecer.",correct:"Esclerénquima",options:["Esclerénquima","Lignénquima","Fibrenquima","Durenquima"]},
+      {prompt:"Apéndice articulado con función sensorial en la zona bucal de insectos y arácnidos.",correct:"Palpo",options:["Palpo","Sensorino","Tactema","Palpíndromo"]},
     ]},
-  { id:"croata", emoji:"🇭🇷", title:"Croata", subtitle:"¿Qué significa esta palabra en croata?", tipo:"word", accent:"#48cae4",
+  { id:"catala", emoji:"🏴󠁥󠁳󠁣󠁴󠁿", title:"Catalogna", subtitle:"¿Qué significa esta palabra en catalán?", tipo:"word", accent:"#f4a261",
+    questions:[
+      {prompt:"pregadéu", correct:"mantis religiosa",options:["monje","escarabajo","maleante","mantis religiosa"]},
+      {prompt:"arna",     correct:"polilla",          options:["picor","grillo","chinche","polilla"]},
+      {prompt:"fàsmic",   correct:"insecto palo",     options:["escarabajo","bicho raro","muerto de hambre","insecto palo"]},
+      {prompt:"maldestre",correct:"torpe",            options:["arrogante","raro","cobarde","torpe"]},
+      {prompt:"badoc",    correct:"bobo",             options:["impaciente","adoquín","impulsivo","bobo"]},
+      {prompt:"gebrada",  correct:"escarcha",         options:["granizo","niebla","ventisca","escarcha"]},
+      {prompt:"garota",   correct:"erizo de mar",     options:["almeja","mujerzuela","concha","erizo de mar"]},
+      {prompt:"garbuix",  correct:"revoltijo",        options:["bullicio","rencor","desamparo","revoltijo"]},
+      {prompt:"gatzara",  correct:"alboroto",         options:["reunión","madrugada","resaca","alboroto"]},
+      {prompt:"fotimer",  correct:"cantidad enorme",  options:["poco","sin más","razonable","mogollón"]},
+    ]},
+  { id:"croata", emoji:"🇭🇷", title:"Croata lomo ya", subtitle:"Amigos falsos", tipo:"word", accent:"#48cae4",
     questions:[
       {prompt:"pero", correct:"pluma",   options:["barco","clavo","nube","pluma"]},
-      {prompt:"dar",  correct:"regalo",  options:["dar","lluvia","regalo","montaña"]},
-      {prompt:"more", correct:"mar",     options:["más","raíz","mar","piedra"]},
+      {prompt:"dar",  correct:"regalo",  options:["hazaña","lluvia","regalo","montaña"]},
+      {prompt:"more", correct:"mar",     options:["más","menos","mar","amor"]},
       {prompt:"pet",  correct:"cinco",   options:["mascota","camino","sombra","cinco"]},
-      {prompt:"kit",  correct:"ballena", options:["equipo","nube","ballena","camino"]},
+      {prompt:"kit",  correct:"ballena", options:["equipo","tubo","ballena","reloj"]},
       {prompt:"dim",  correct:"humo",    options:["oscuro","campo","río","humo"]},
-      {prompt:"sat",  correct:"reloj",   options:["asiento","lluvia","árbol","reloj"]},
-      {prompt:"luk",  correct:"cebolla", options:["mirada","puente","cebolla","viento"]},
-      {prompt:"ton",  correct:"atún",    options:["tono","barco","atún","tierra"]},
+      {prompt:"sat",  correct:"reloj",   options:["asiento","señal","árbol","reloj"]},
+      {prompt:"luk",  correct:"cebolla", options:["mirada","ojo","cebolla","viento"]},
+      {prompt:"ton",  correct:"atún",    options:["color","barco","atún","consonante"]},
       {prompt:"mast", correct:"grasa",   options:["mástil","luna","río","grasa"]},
-    ]},
-  { id:"catala", emoji:"🔴", title:"Català", subtitle:"¿Qué significa esta palabra en catalán?", tipo:"word", accent:"#f4a261",
-    questions:[
-      {prompt:"pregadéu", correct:"mantis religiosa",options:["libélula","escarabajo","ciempiés","mantis religiosa"]},
-      {prompt:"arna",     correct:"polilla",          options:["tábano","grillo","chinche","polilla"]},
-      {prompt:"fàsmic",   correct:"insecto palo",     options:["escarabajo","tijereta","saltamontes","insecto palo"]},
-      {prompt:"maldestre",correct:"torpe",            options:["arrogante","tacaño","cobarde","torpe"]},
-      {prompt:"badoc",    correct:"despistado",       options:["gruñón","presumido","impulsivo","despistado"]},
-      {prompt:"gebrada",  correct:"escarcha",         options:["granizo","niebla","ventisca","escarcha"]},
-      {prompt:"garota",   correct:"erizo de mar",     options:["almeja","calamar","cangrejo","erizo de mar"]},
-      {prompt:"garbuix",  correct:"revoltijo",        options:["bullicio","rencor","descuido","revoltijo"]},
-      {prompt:"gatzara",  correct:"jolgorio",         options:["disputa","madrugada","resaca","jolgorio"]},
-      {prompt:"fotimer",  correct:"cantidad enorme",  options:["exageración","desastre","mentira","cantidad enorme"]},
-    ]},
+    ]}
 ];
 
 const OPTS=[{bg:"#e63946",sh:"▲"},{bg:"#4361ee",sh:"◆"},{bg:"#f4a261",sh:"●"},{bg:"#52b788",sh:"■"}];
@@ -275,9 +278,9 @@ function render(){
 function vHome(){
   return`<div class="page fi" style="text-align:center;">
     <div>
-      <p style="font-size:11px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:16px;">Juego de palabras</p>
+      <p style="font-size:11px;letter-spacing:5px;color:#555;text-transform:uppercase;margin-bottom:16px;">El juego de palabras</p>
       <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(60px,14vw,100px);font-weight:700;line-height:1;margin-bottom:16px;">Bralapas</h1>
-      <p style="color:#555;font-size:15px;">Plantas · Croata · Català</p>
+      <p style="color:#555;font-size:15px;">Como "Bra La Pa", pero en plural</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:300px;">
       <button class="btn bw" id="bhost">Crear partida</button>
@@ -322,7 +325,7 @@ function vHGame(){
             :`<p style="color:#444;font-style:italic;font-size:14px;">Esperando jugadores…</p>`}
         </div>
       </div>
-      <p style="font-size:13px;color:#555;max-width:380px;text-align:center;">La partida incluye las 3 secciones: 🌿 Plantas · 🇭🇷 Croata · 🔴 Català</p>
+      <p style="font-size:13px;color:#555;max-width:380px;text-align:center;">Os lo vais a pasar guay... espero</p>
       <button class="btn bw" id="bstartlobby" ${jugadores.length===0?'disabled':''}>Empezar →</button>
     </div>`;
   }
@@ -403,7 +406,7 @@ function vHGame(){
         }).join('')}
       </div>
 
-      ${!isRev?`<p style="color:#555;font-size:13px;text-align:center;">Esperando respuestas… · Puntuación: 100pts (−3/s tras 3s, mín. 50)</p>`:''}
+      ${!isRev?`<p style="color:#555;font-size:13px;text-align:center;">Esperando respuestas…</p>`:''}
     </div>
   </div>`;
 }
