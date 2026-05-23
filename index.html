@@ -526,7 +526,7 @@ function vPGame(){
           :`<div style="font-size:clamp(17px,3vw,22px);color:#ccc;font-style:bold;line-height:1.55;">${prompt}</div>`
         }
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1;align-content:stretch;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1;align-content:stretch;max-height:260px">
         ${opciones.map((opt,i)=>`
           <button class="obtn popt" data-opt="${opt}" style="background:${OPTS[i].bg};">
             <span style="font-size:17px;">${OPTS[i].sh}</span><span>${opt}</span>
